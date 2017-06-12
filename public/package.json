@@ -1,0 +1,27 @@
+{
+  "name": "public",
+  "version": "1.0.0",
+  "description": "An application that allows users to create playlists of YouTube music videos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JGraziano2/Turn-Table.git"
+  },
+  "author": "Trailhead Apprentices",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/JGraziano2/Turn-Table/issues"
+  },
+  "homepage": "https://github.com/JGraziano2/Turn-Table#readme",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-modal-service": "^0.12.1",
+    "angular-ui-router": "^1.0.3",
+    "angularfire": "^2.3.0",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}
