@@ -1,25 +1,36 @@
 <div class="container">
     <div class="row">
         <button class="btn btn-primary" id="loginModal">Login</button>
+        <br/>
         <button class="btn btn-primary" id="registerModal">Register</button>
     </div>
-    
+
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <form>
-                <input type="email" id="email" placeholder="Email" />
-                <input type="password" id="password" placeholder="Password" />
-                <button class="btn btn-success" id="login" ng-click="login()">Login</button>
+            <span class="close">&times;</span>
+            <form ng-submit="login()">
+                <div class="form-group">
+                    <input type="email" class="form-control" ng-model="email" id="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
+                </div>
+                <button type="submit" class="btn btn-success" id="login">Login</button>
             </form>
         </div>
     </div>
-    
+
     <div class="modal" id="registerModal">
         <div class="modal-content">
-            <form>
-                <input type="email" id="email" placeholder="Email" />
-                <input type="password" id="password" placeholder="Password" />
-                <button class="btn btn-success" id="login" ng-click="register()">Register</button>
+            <span class="close">&times;</span>
+            <form ng-submit="register()">
+                <div class="form-group">
+                    <input type="email" class="form-control" ng-model="email" id="email" placeholder="Email" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" ng-model="email" id="password" placeholder="Password" />
+                </div>
+                <button class="btn btn-success" id="login">Register</button>
             </form>
         </div>
     </div>
