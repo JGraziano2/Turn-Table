@@ -5,19 +5,21 @@
         .module('app')
         .controller('PlaylistCtrl', PlaylistCtrl);
     
-    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams'];
+    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject'];
     
-    function PlaylistCtrl($scope, $firebaseArray, $stateParams){
+    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject){
         $scope.playlistList;
-        $scope.mockUser;
         $scope.songlist;
         
         $scope.editPlaylistList = editPlaylistList;
         $scope.addPlaylist = addPlaylist;
         $scope.editSongs = editSongs;
-        $scope.addSong = addSong;
+        //$scope.addSong = addSong;
         $scope.savePlaylistList = savePlaylistList;
         $scope.saveSonglist = saveSonglist;
+        $scope.removeSong = removeSong;
+        $scope.removePlaylist = removePlaylist;
+        $scope.selectPlaylist = selectPlaylist;
         
         $scope.isEditingPlaylistList = false;
         $scope.isEditingSongs = false;
@@ -29,8 +31,7 @@
             //songlist and playlist
             var ref = firebase.database().ref();
             //$scope.playlist = $firebaseArray(ref.child($stateParams.id).child('playlistList'));
-            $scope.mockUser = $firebaseObject(ref);
-            $scope.playlistList = $firebaseArray(mockUser.child('playlistList'));
+            $scope.playlistList = $firebaseArray(ref.child('stateParamsid').child('playlistList'));
 
             //TODO: needs to get all songs with the playlistId
             //$scope.playlist = $firebaseArray(ref.child($stateParams.id).child('playlistList'));
@@ -50,23 +51,36 @@
             $scope.playlistList.$add({id: '', name: ''});
         }
         
+        function removePlaylist(playlist){
+            $scope.playlistList.$remove(playlist);
+        }
+        
         function editSongs(){
             $scope.isEditingSongs = true;
         }
         
-        function addSong(){            
-            
+//        function addSong(){            
+//            $scope.songlist.add$({name: "", url: "", playlistLists.$ref().key()});
+//        }
+        
+        function removeSong(song){
+            $scope.songlist.$remove(song);
         }
             
         function savePlaylistList(){
-//            for(var i=0; i<$scope.playlistList.length; i++){
-//             $scope.playlistList.$save($scope.playlistList[i]);   
-//            }
+            for(var i=0; i<$scope.playlistList.length; i++){
+             $scope.playlistList.$save($scope.playlistList[i]);   
+            }
             $scope.isEditingPlaylistList = false;
         }
             
         function saveSonglist(){
             $scope.isEditingSongs = false;
+        }
+        
+        function selectPlaylist(playlist){
+            console.log(playlist.$id);
+            
         }
         
         

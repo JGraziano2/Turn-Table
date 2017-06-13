@@ -20,21 +20,33 @@
     </div>
     
     
-    <div class="row">        
+    <div class="row" ng-hide="isEditingPlaylistList">        
         <div class="col-md-3 col-md-offset-2 well" id="playlist-list"> 
             <ol>
-                <li>This is a playlist name<span class="glyphicon glyphicon-remove" ng-click="removeSong()" ng-show="isEditingPlaylistList"></span></li>
-                <li>This is a playlist name</li>
-                <li>This is a playlist name</li>
-                <li>This is a playlist name</li>
+                <li ng-repeat="playlist in playlistList" ng-click="selectPlaylist(playlist)">{{playlist.name}}</li>
             </ol>
         </div>
         <div class="col-md-5 well" id="songlist">
             <ol>
-                <li>This is a song name</li>
-                <li>This is a song name</li>
-                <li>This is a song name</li>
-                <li>This is a song name</li>                
+                <li ng-repeat="song in songs">{{song.name}}</li>                
+            </ol>
+        </div>
+    </div>
+    
+    <div class="row" ng-show="isEditingPlaylistList">        
+        <div class="col-md-3 col-md-offset-2 well" id="playlist-list"> 
+            <ol>
+                <li ng-repeat="playlist in playlistList">
+                    <div class="form-group">
+						<input type="text" class="form-control" ng-model="playlist.name" placeholder="Name">
+					</div>
+                    <span class="glyphicon glyphicon-remove" ng-click="removePlaylist(playlist)" ng-show="isEditingPlaylistList"></span>
+                </li>
+            </ol>
+        </div>
+        <div class="col-md-5 well" id="songlist">
+            <ol>
+                <li ng-repeat="song in songs">This is a song name<span class="glyphicon glyphicon-remove" ng-click="removeSong()" ng-show="isEditingSongs"></span></li>                
             </ol>
         </div>
     </div>
