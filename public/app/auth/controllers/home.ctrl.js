@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('HomeCtrl', HomeCtrl);
 
-	HomeCtrl.$inject = ['$scope', '$state','$AuthService'];
+	HomeCtrl.$inject = ['$scope', '$state','AuthService'];
 
-	function HomeCtrl($scope, $state, $AuthService) {
+	function HomeCtrl($scope, $state, AuthService) {
 		$scope.login = login;
 		$scope.register = register;
 
