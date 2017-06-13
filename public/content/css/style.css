@@ -1,3 +1,17 @@
+/* Home Styles */
+#auth {
+    background-image: url(../img/vinyl-record.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+#buttons {
+    padding-bottom: 60%;
+    margin-left: 47%;
+    margin-top: 14%;
+}
+
 /* Playlist */
 #songlist{
     padding: 0;
