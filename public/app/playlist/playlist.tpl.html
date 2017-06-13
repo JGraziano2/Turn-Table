@@ -21,10 +21,14 @@
     
     
     <div class="row" ng-hide="isEditingPlaylistList">        
-        <div class="col-md-3 col-md-offset-2 well" id="playlist-list"> 
-            <ol>
-                <li ng-repeat="playlist in playlistList" ng-click="selectPlaylist(playlist)">{{playlist.name}}</li>
-            </ol>
+        <div class="col-md-3 col-md-offset-2 well" id="playlist-list">
+
+            <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well">
+
+              <li class="active" class="btn btn-block btn-primary" ng-repeat="playlist in playlistList" ng-click="selectPlaylist(playlist)"><a href="#vtab1" data-toggle="tab">{{playlist.name}}</a></li>
+
+            </ul>
+            
         </div>
         <div class="col-md-5 well" id="songlist">
             <ol>
