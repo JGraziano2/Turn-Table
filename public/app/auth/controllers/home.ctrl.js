@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('app', ['angularModalService'])
+		.module('app')
 		.controller('HomeCtrl', HomeCtrl);
 
 	HomeCtrl.$inject = ['$scope', '$state','AuthService', 'ModalService'];
@@ -21,7 +21,7 @@
 				$state.go('playlist', {id: data.uid});
 			}).catch(function(error) {
 				console.log(error);
-			})
+			});
 		}
 
 		function register() {
@@ -39,12 +39,12 @@
 			ModalService.showModal({
 				templateUrl: 'app/auth/templates/loginModal.tpl.hmtl'
 				// controller: 'ModalCtrl'
-			}).then(function(modal)){
+			}).then(function(modal){
 				modal.element.modal();
 				modal.close.then(function(result){
 					console.log('closed: ' + result);
 				});
-			}
+			});
             // $scope.showRegisterShow = false;
             // $scope.showLoginShow = true;
 		}
@@ -54,18 +54,14 @@
 			ModalService.showModal({
 				templateUrl: 'app/auth/templates/registerModal.tpl.hmtl'
 				// controller: 'ModalCtrl'
-			}).then(function(modal)){
+			}).then(function(modal){
 				modal.element.modal();
 				modal.close.then(function(result){
 					console.log('closed: ' + result);
 				});
-			}
+			})
             // $scope.showLoginShow = false;
             // $scope.showRegisterShow = true;
 		}
 	}
-
-
-
-
 })();
