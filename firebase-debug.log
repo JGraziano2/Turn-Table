@@ -1,0 +1,28 @@
+[debug] [2017-06-13T16:08:22.353Z] ----------------------------------------------------------------------
+[debug] [2017-06-13T16:08:22.362Z] Command:      C:\Program Files\nodejs\node.exe C:\Users\Ben\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2017-06-13T16:08:22.364Z] CLI Version:  3.9.1
+[debug] [2017-06-13T16:08:22.364Z] Platform:     win32
+[debug] [2017-06-13T16:08:22.364Z] Node Version: v6.10.3
+[debug] [2017-06-13T16:08:22.365Z] Time:         Tue Jun 13 2017 10:08:22 GMT-0600 (Mountain Daylight Time)
+[debug] [2017-06-13T16:08:22.365Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-06-13T16:08:22.412Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-06-13T16:08:22.413Z] > authorizing via signed-in user
+[debug] [2017-06-13T16:08:22.422Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/turntable-60564  
+ Tue Jun 13 2017 10:08:22 GMT-0600 (Mountain Daylight Time)
+[debug] [2017-06-13T16:08:23.450Z] <<< HTTP RESPONSE 200
+[debug] [2017-06-13T16:08:23.454Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/turntable-60564/tokens  
+ Tue Jun 13 2017 10:08:23 GMT-0600 (Mountain Daylight Time)
+[debug] [2017-06-13T16:08:24.489Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Ben\Documents\GitHub\Turn-Table'...
+[info] 
+[debug] [2017-06-13T16:08:24.517Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/turntable-60564  
+ Tue Jun 13 2017 10:08:24 GMT-0600 (Mountain Daylight Time)
+[debug] [2017-06-13T16:08:24.992Z] <<< HTTP RESPONSE 200
+[debug] [2017-06-13T16:08:24.995Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/212071875365/clients/_:getWebAppConfig  
+ Tue Jun 13 2017 10:08:24 GMT-0600 (Mountain Daylight Time)
+[debug] [2017-06-13T16:08:25.808Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+

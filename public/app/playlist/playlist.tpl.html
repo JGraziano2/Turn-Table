@@ -1,19 +1,50 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-3 col-md-2-offset well" id="playlist-list">
-            <ol ng-repeat>
-                <li>This is a playlist name</li>
+    
+    <div class="">
+        
+    </div>
+    
+     <div class="row">        
+        <div class="col-md-3 col-md-offset-2 well" id="playlist-list-header"> 
+                <h4>Playlist List</h4>
+                <span class="glyphicon glyphicon-plus pull-right" ng-click="addPlaylist()"></span>
+                <span class="glyphicon glyphicon-pencil pull-right" ng-click="editPlaylistList()" ng-hide="isEditingPlaylistList"></span>
+                <span class="glyphicon glyphicon-floppy-disk pull-right" ng-click="savePlaylistList()" ng-show="isEditingPlaylistList"></span>
+        </div>
+        <div class="col-md-5 well" id="songlist-header">
+                <h4>Song List</h4>
+                <span class="glyphicon glyphicon-plus pull-right" ng-click="addSong()" ></span>
+                <span class="glyphicon glyphicon-pencil pull-right" ng-click="editSongs()" ng-hide="isEditingSongs"></span>
+                <span class="glyphicon glyphicon-floppy-disk pull-right" ng-click="saveSonglist()" ng-show="isEditingSongs"></span>
+        </div>
+    </div>
+    
+    
+    <div class="row">        
+        <div class="col-md-3 col-md-offset-2 well" id="playlist-list"> 
+            <ol>
+                <li>This is a playlist name<span class="glyphicon glyphicon-remove" ng-click="removeSong()" ng-show="isEditingPlaylistList"></span></li>
                 <li>This is a playlist name</li>
                 <li>This is a playlist name</li>
                 <li>This is a playlist name</li>
             </ol>
         </div>
         <div class="col-md-5 well" id="songlist">
-            <ol ng-repeat>
-                <li>This is a playlist name</li>
-                <li>This is a playlist name</li>
-                <li>This is a playlist name</li>
+            <ol>
+                <li>This is a song name</li>
+                <li>This is a song name</li>
+                <li>This is a song name</li>
+                <li>This is a song name</li>                
             </ol>
+        </div>
+    </div>
+    
+    <div class="row pull-bottom" id="control-bar">
+        <div class="col-sm-3 col-md-offset-3 text-center">
+            Controls
+        </div>
+        <div class="col-xs-1 pull-right">
+            Cog
         </div>
     </div>
 
