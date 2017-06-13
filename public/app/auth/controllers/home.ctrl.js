@@ -5,16 +5,16 @@
 		.module('app', ['angularModalService'])
 		.controller('HomeCtrl', HomeCtrl);
 
-	HomeCtrl.$inject = ['$scope', '$state','AuthService', 'angularModalService'];
+	HomeCtrl.$inject = ['$scope', '$state','AuthService', 'ModalService'];
 
-	function HomeCtrl($scope, $state, AuthService) {
+	function HomeCtrl($scope, $state, AuthService, ModalService) {
 		$scope.login = login;
 		$scope.register = register;
-        $scope.loginModal = loginModal;
-        $scope.registerModal = registerModal;
+        $scope.showLogin = showLogin;
+        $scope.showRegister = showRegister;
         
-        $scope.loginModalShow = false;
-        $scope.registerModalShow = false;
+        $scope.showLoginShow = false;
+        $scope.showRegisterShow = false;
         
 		function login() {
 			AuthService.login($scope.email, $scope.password).then(function(data) {
@@ -34,51 +34,38 @@
 			});
 		}
 
-		function loginModal() {
-<<<<<<< HEAD
-			
-			
-
-			
-			var modal = document.getElementById('loginModal');
-			var btn = document.getElementById("loginModalButton");
-			var span = document.getElementsByClassName("close")[0];
-			btn.onclick = function() {
-			    modal.style.display = "block";
-			}
-			span.onclick = function() {
-			    modal.style.display = "none";
-			}
-			window.onclick = function(event) {
-			    if (event.target == modal)
-			        modal.style.display = "none";
-			}
-=======
+		function showLogin() {
             console.log("clicked login");
-            
-            $scope.registerModalShow = false;
-            $scope.loginModalShow = true;            
->>>>>>> f4a68bdc532d3bb89699459fd6bf859a1f5582e8
+			ModalService.showModal({
+				templateUrl: 'app/auth/templates/loginModal.tpl.hmtl'
+				// controller: 'ModalCtrl'
+			}).then(function(modal)){
+				modal.element.modal();
+				modal.close.then(function(result){
+					console.log('closed: ' + result);
+				});
+			}
+            // $scope.showRegisterShow = false;
+            // $scope.showLoginShow = true;
 		}
 
-		function registerModal() {
-            $scope.loginModalShow = false;
-            $scope.registerModalShow = true;
-            
-            /*
-			var modal = document.getElementById('registerModal');
-			var btn = document.getElementById("registerModalButton");
-			var span = document.getElementsByClassName("close")[0];
-			btn.onclick = function() {
-			    modal.style.display = "block";
+		function showRegister() {
+			console.log("clicked register");
+			ModalService.showModal({
+				templateUrl: 'app/auth/templates/registerModal.tpl.hmtl'
+				// controller: 'ModalCtrl'
+			}).then(function(modal)){
+				modal.element.modal();
+				modal.close.then(function(result){
+					console.log('closed: ' + result);
+				});
 			}
-			span.onclick = function() {
-			    modal.style.display = "none";
-			}
-			window.onclick = function(event) {
-			    if (event.target == modal)
-			        modal.style.display = "none";
-			}*/
+            // $scope.showLoginShow = false;
+            // $scope.showRegisterShow = true;
 		}
 	}
+
+
+
+
 })();
