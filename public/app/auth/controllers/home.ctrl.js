@@ -5,37 +5,17 @@
 		.module('app')
 		.controller('HomeCtrl', HomeCtrl);
 
-	HomeCtrl.$inject = ['$scope', '$state','AuthService', 'ModalService'];
+	HomeCtrl.$inject = ['$scope', '$state', 'ModalService'];
 
-	function HomeCtrl($scope, $state, AuthService, ModalService) {
-		$scope.login = login;
-		$scope.register = register;
+	function HomeCtrl($scope, $state, ModalService) {
         $scope.showLogin = showLogin;
         $scope.showRegister = showRegister;
-        
-		function login() {
-			AuthService.login($scope.email, $scope.password).then(function(data) {
-				$state.go('playlist', {id: data.uid});
-			}).catch(function(error) {
-				console.log(error);
-			});
-		}
-
-		function register() {
-			AuthService.register($scope.email, $scope.password).then(function(data) {
-				AuthService.login($scope.email, $scope.password).then(function(data) {
-					$state.go('playlist', {id: data.uid});
-				})
-			}).catch(function(error) {
-				console.log(error);
-			});
-		}
 
 		function showLogin() {
             console.log("clicked login");
 			ModalService.showModal({
-				templateUrl: 'app/auth/templates/loginModal.tpl.hmtl'
-				// controller: 'ModalCtrl'
+				templateUrl: 'app/auth/templates/loginModal.tpl.html',
+				controller: 'ModalCtrl'
 			}).then(function(modal){
 				modal.element.modal();
 				modal.close.then(function(result){
@@ -47,8 +27,8 @@
 		function showRegister() {
 			console.log("clicked register");
 			ModalService.showModal({
-				templateUrl: 'app/auth/templates/registerModal.tpl.hmtl'
-				// controller: 'ModalCtrl'
+				templateUrl: 'app/auth/templates/registerModal.tpl.html',
+				controller: 'ModalCtrl'
 			}).then(function(modal){
 				modal.element.modal();
 				modal.close.then(function(result){

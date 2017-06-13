@@ -12,11 +12,11 @@
                     <div class="form-group">
                         <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
                     </div>
-                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="submit" class="btn btn-success" ng-click="close()">Login</button>
                 </form>
             </div>
             <div class="modal-footer">
-
+                <p id="message">{{message}}</p>
             </div>
         </div>
     </div>

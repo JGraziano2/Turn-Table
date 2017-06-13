@@ -10,7 +10,7 @@
     function config($stateProvider) {
         $stateProvider
             .state('playlist', {
-                url: '/playlist',
+                url: '/playlist/{id}',
                 templateUrl: 'app/playlist/playlist.tpl.html',
                 controller: 'PlaylistCtrl'
         });            
