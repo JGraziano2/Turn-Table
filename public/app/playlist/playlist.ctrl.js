@@ -59,9 +59,9 @@
         }
             
         function savePlaylistList(){
-            for(var i=0; i<$scope.playlistList.length; i++){
-             $scope.playlistList.$save($scope.playlistList[i]);   
-            }
+//            for(var i=0; i<$scope.playlistList.length; i++){
+//             $scope.playlistList.$save($scope.playlistList[i]);   
+//            }
             $scope.isEditingPlaylistList = false;
         }
             
