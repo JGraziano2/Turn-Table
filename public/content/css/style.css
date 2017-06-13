@@ -2,7 +2,7 @@
 #auth {
     background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
     background-color: rgba(100,100,100,.5);
-        -webkit-background-size: cover;
+    -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
