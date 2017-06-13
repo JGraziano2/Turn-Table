@@ -1,11 +1,11 @@
 <div class="container authenticaiton" id="auth">
     <div class="row">
-        <button class="btn btn-primary" id="loginModal">Login</button>
+        <button class="btn btn-primary" id="loginModalButton" ng-click="loginModal()">Login</button>
         <br/>
-        <button class="btn btn-primary" id="registerModal">Register</button>
+        <button class="btn btn-primary" id="registerModalButton" ng-click="registerModal()">Register</button>
     </div>
 
-    <div class="modal" id="loginModal">
+    <div class="modal" id="loginModal" ng-show="loginModalShow">
         <div class="modal-content">
             <span class="close">&times;</span>
             <form ng-submit="login()">
@@ -15,12 +15,12 @@
                 <div class="form-group">
                     <input type="password" class="form-control" ng-model="password" id="password" placeholder="Password" />
                 </div>
-                <button type="submit" class="btn btn-success" id="login">Login</button>
+                <button type="submit" class="btn btn-success">Login</button>
             </form>
         </div>
     </div>
 
-    <div class="modal" id="registerModal">
+    <div class="modal" id="registerModal"ng-show="registerModalShow">
         <div class="modal-content">
             <span class="close">&times;</span>
             <form ng-submit="register()">
@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <input type="password" class="form-control" ng-model="email" id="password" placeholder="Password" />
                 </div>
-                <button class="btn btn-success" id="login">Register</button>
+                <button type="submit" class="btn btn-success">Register</button>
             </form>
         </div>
     </div>
