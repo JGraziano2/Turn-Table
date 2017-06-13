@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="row">
+        <button class="btn btn-primary" id="loginModal">Login</button>
+        <button class="btn btn-primary" id="registerModal">Register</button>
+    </div>
+    
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <form>
+                <input type="email" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Password" />
+                <button class="btn btn-success" id="login" ng-click="login()">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <form>
+                <input type="email" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Password" />
+                <button class="btn btn-success" id="login" ng-click="register()">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
