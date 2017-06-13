@@ -20,25 +20,16 @@
     </div>
     
     
-    <div class="row" ng-hide="isEditingPlaylistList">        
-        <div class="col-md-3 col-md-offset-2 well" id="playlist-list">
-
+    <div class="row" >
+        
+        <!-- Show/Edit Playlist List -->
+        <div class="col-md-3 col-md-offset-2 well" id="playlist-list" ng-hide="isEditingPlaylistList">
             <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked well">
-
               <li class="active" class="btn btn-block btn-primary" ng-repeat="playlist in playlistList" ng-click="selectPlaylist(playlist)"><a href="#vtab1" data-toggle="tab">{{playlist.name}}</a></li>
-
-            </ul>
-            
-        </div>
-        <div class="col-md-5 well" id="songlist">
-            <ol>
-                <li ng-repeat="song in songs">{{song.name}}</li>                
-            </ol>
-        </div>
-    </div>
-    
-    <div class="row" ng-show="isEditingPlaylistList">        
-        <div class="col-md-3 col-md-offset-2 well" id="playlist-list"> 
+            </ul>            
+        </div>       
+        
+        <div class="col-md-3 col-md-offset-2 well" id="playlist-list" ng-show="isEditingPlaylistList"> 
             <ol>
                 <li ng-repeat="playlist in playlistList">
                     <div class="form-group">
@@ -48,11 +39,29 @@
                 </li>
             </ol>
         </div>
-        <div class="col-md-5 well" id="songlist">
+        <!--  -- - - - - -  -->
+        
+        <!-- Show/Edit Songlist -->
+        <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in songs">This is a song name<span class="glyphicon glyphicon-remove" ng-click="removeSong()" ng-show="isEditingSongs"></span></li>                
+                <li ng-repeat="song in songs">{{song.name}}</li>                
             </ol>
         </div>
+        
+        <div class="col-md-5 well" id="songlist" ng-show="isEditingSongs">
+            <ol>
+                <li ng-repeat="song in songs">
+                    <div class="form-group">
+						<input type="text" class="form-control" ng-model="song.name" placeholder="Name">
+					</div>
+                    <div class="form-group">
+						<input type="text" class="form-control" ng-model="song.url" placeholder="Url">
+					</div>
+                    <span class="glyphicon glyphicon-remove" ng-click="removeSong()" ng-show="isEditingSongs"></span>
+                </li>                
+            </ol>
+        </div>
+        <!----- - - -  -- - -- - -- - -->
     </div>
     
     <div class="row pull-bottom" id="control-bar">
