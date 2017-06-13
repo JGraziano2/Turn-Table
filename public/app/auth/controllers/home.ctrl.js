@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('app', ['angularModalService'])
+		.module('app')
 		.controller('HomeCtrl', HomeCtrl);
 
 	HomeCtrl.$inject = ['$scope', '$state','AuthService', 'ModalService'];
@@ -18,7 +18,7 @@
 				$state.go('playlist', {id: data.uid});
 			}).catch(function(error) {
 				console.log(error);
-			})
+			});
 		}
 
 		function register() {
@@ -57,8 +57,4 @@
 			});
 		}
 	}
-
-
-
-
 })();

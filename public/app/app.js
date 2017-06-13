@@ -8,9 +8,9 @@
 	    projectId: "turntable-60564",
 	    storageBucket: "turntable-60564.appspot.com",
 	    messagingSenderId: "212071875365"
-		};
+	};
 	firebase.initializeApp(config);
 
 	angular
-		.module('app', ['ui.router', 'firebase']);
+		.module('app', ['ui.router', 'firebase', 'angularModalService']);
 })();
