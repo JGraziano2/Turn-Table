@@ -10,7 +10,7 @@
     function config($stateProvider) {
         $stateProvider
             .state('playlist', {
-                url: '/playlist/',
+                url: '/playlist',
                 template: '<playlist></playlist>'
         });            
     }    
