@@ -13,9 +13,6 @@
         $scope.showLogin = showLogin;
         $scope.showRegister = showRegister;
         
-        $scope.showLoginShow = false;
-        $scope.showRegisterShow = false;
-        
 		function login() {
 			AuthService.login($scope.email, $scope.password).then(function(data) {
 				$state.go('playlist', {id: data.uid});
@@ -45,8 +42,6 @@
 					console.log('closed: ' + result);
 				});
 			});
-            // $scope.showRegisterShow = false;
-            // $scope.showLoginShow = true;
 		}
 
 		function showRegister() {
@@ -60,8 +55,6 @@
 					console.log('closed: ' + result);
 				});
 			});
-            // $scope.showLoginShow = false;
-            // $scope.showRegisterShow = true;
 		}
 	}
 
