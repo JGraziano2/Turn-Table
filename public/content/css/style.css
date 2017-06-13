@@ -1,22 +1,33 @@
 /* Home Styles */
 #auth {
-    background-image: url(../img/vinyl-record.jpg);
+    background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
+    background-color: rgba(100,100,100,.5);
+        -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
     background-color: black;
+    height: 100vh;
 }
 
 #buttons {
-    padding-bottom: 60%;
-    margin-left: 47%;
-    margin-top: 14%;
+    position: fixed;
+    top: 42.7%;
+    left: 47.5%;
+    text-align: center;
+}
+
+.homeButtons {
+    background-color: red;
 }
 
 /* Playlist */
 #songlist{
     padding: 0;
     max-height: 10em;
-     min-height: 10em;
+    min-height: 10em;
     overflow-y: auto;   
 }
 
