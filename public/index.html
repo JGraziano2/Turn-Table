@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+        <base href="/">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="content/css/style.css" rel="stylesheet">
+        <title>Turn Table</title>
+    </head>
+    <body>
+        <div ui-view></div>
+
+        <!-- Node Modules -->
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="node_modules/firebase/firebase.js"></script>
+        <script src="node_modules/angularfire/dist/angularfire.min.js"></script>
+        <script src="node_modules/angular-modal-service/src/angular-modal-service.js"></script>
+
+        <!-- App Scripts -->
+        <script src="app/app.js"></script>
+        <script src="app/app.config.js"></script>
+
+        <!-- Auth Scripts -->
+        <script src="app/auth/auth.routes.js"></script>
+        <script src="app/auth/services/auth.service.js"></script>
+        <script src="app/auth/controllers/home.ctrl.js"></script>
+        
+        <!-- Playlist Scripts -->
+        <script src="app/playlist/playlist.routes.js"></script>
+        <script src="app/playlist/playlist.ctrl.js"></script>
+        
+        
+
+    </body>
+</html>
