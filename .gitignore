@@ -1,2 +1,7 @@
 public/node_modules
 firebase-debug.log
+.firebasesrc
+database.rules.json
+firebase.json
+npm-debug.log
+README.md
