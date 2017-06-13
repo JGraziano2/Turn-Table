@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module 'app';
+		.module 'app'
 		.controller('HomeCtrl', HomeCtrl);
 
 	HomeCtrl.$inject = ['$scope', '$state','$AuthService'];
@@ -29,6 +29,8 @@
 				console.log(error);
 			});
 		}
+
+		
 	}
 
 

@@ -13,6 +13,6 @@
 				url: '/home',
 				templateUrl: 'app/auth/templates/home.tpl.html',
 				controller: 'HomeCtrl'
-			};
+			});
 	}
 })();
