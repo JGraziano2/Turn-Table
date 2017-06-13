@@ -2,10 +2,10 @@
 	'use strict';
 
 	angular
-		.module('app')
+		.module('app', ['angularModalService'])
 		.controller('HomeCtrl', HomeCtrl);
 
-	HomeCtrl.$inject = ['$scope', '$state','AuthService'];
+	HomeCtrl.$inject = ['$scope', '$state','AuthService', 'angularModalService'];
 
 	function HomeCtrl($scope, $state, AuthService) {
 		$scope.login = login;
@@ -31,6 +31,10 @@
 		}
 
 		function loginModal() {
+			
+			
+
+			
 			var modal = document.getElementById('loginModal');
 			var btn = document.getElementById("loginModalButton");
 			var span = document.getElementsByClassName("close")[0];
