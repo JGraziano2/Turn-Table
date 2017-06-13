@@ -1,3 +1,33 @@
+/* Playlist */
+#songlist{
+    padding: 0;
+    max-height: 10em;
+     min-height: 10em;
+    overflow-y: auto;   
+}
+
+#playlist-list{
+    padding: 0;
+    max-height: 10em;
+    min-height: 10em;
+    overflow-y: auto;
+}
+
+#playlist-list li{
+    font-size:1em;
+    padding:.25em 1em;
+    line-height:1em;
+}
+
+#playlist-list-header{
+    padding:0.1em;
+    margin-bottom:0.1em;
+}
+
+#songlist-header{
+    margin-bottom:0.1em;
+    padding:0.1em;
+    
 /* Modal Styles */
 .modal {
     position: fixed;
