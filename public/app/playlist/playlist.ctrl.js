@@ -7,8 +7,7 @@
     
     PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject'];
     
-    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject){        
-        
+    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject){       
         $scope.playlists;        
         $scope.editPlaylists = editPlaylists;
         $scope.addPlaylist = addPlaylist;
@@ -34,12 +33,10 @@
         function activate(){
             var ref = firebase.database().ref().child($stateParams.id).child('playlists');            
             $scope.playlists = $firebaseArray(ref);
-            console.log("current playlist ID = " + curPlaylistId);
             
             var ref = firebase.database().ref().child($stateParams.id).child('songs');  
             $scope.userSongs = $firebaseArray(ref);   
-            console.log("$scope.userSongs: " + $scope.userSongs);
-            loadSongs();                             
+            loadSongs();
         }
         
         function editPlaylists(){
@@ -72,28 +69,26 @@
             $scope.isEditingSongs = true;
         }
         
-        function addSong(){            
-            $scope.userSongs.$add({name: "New Song", url: "", playlistId: curPlaylistId});
-            loadSongs();
+        function addSong(){  
+            var newSong = {name: "New Song", url: "", playlistId: curPlaylistId};
+            $scope.userSongs.$add(newSong);
+            $scope.userSongs.$loaded().then(function(data){
+                console.log("Loading songs...")
+                loadSongs();
+            });            
         }
         
         function removeSong(song){
-            $scope.userSongs.$remove(song);
+            $scope.userSongs.$remove(song.$id);
         }        
             
         function saveSonglist(){            
-            for( var i in $scope.songs){
-                $scope.userSongs.$save($scope.songs[i]).catch(function(error){
-                    console.log(error);
-                });
-            }
             $scope.isEditingSongs = false;
-            activate();
+            loadSongs();
         }
         
         function loadSongs(){
             for(var i=0; i<$scope.userSongs.length; i++){
-                console.log($scope.userSongs[i].playlistId);
                 if($scope.userSongs[i].playlistId === curPlaylistId){
                     $scope.songs.push($scope.userSongs[i]);    
                 }             

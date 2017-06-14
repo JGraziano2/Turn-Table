@@ -45,14 +45,20 @@ body{
 
 /* Playlist */
 #songlist{
-    padding: 0;
+    padding: 1em;
     max-height: 20em;
     min-height: 20em;
-    overflow-y: auto;   
+    overflow-y: auto;
+}
+
+#songlist ol li:hover, #playlist-list ul li:hover{
+    cursor:pointer;
+    padding-left:0.5em;
+    background-color:#999;
 }
 
 #playlist-list{
-    padding: 0;
+    padding: 1em;
     max-height: 20em;
     min-height: 20em;
     overflow-y: auto;
@@ -69,11 +75,15 @@ body{
     padding:0.4em;
     margin-bottom:0.4em;
     margin-right:0.4em;
+    max-height:50px;
+    min-height:50px;
 }
 
 #songlist-header{    
     padding:0.4em;
     margin-bottom:0.4em;
+    max-height:50px;
+    min-height:50px;
 }
 
 #spinny{
