@@ -8,19 +8,13 @@
 	SongCtrl.$inject = ['$scope', 'PlaylistService', '$sce'];
 
 	function SongCtrl($scope, PlaylistService, $sce){
-
-		//any necessary methods for our modal
-		//var video = "";
 		$scope.video;
-
 		activate();
 
 		function activate(){
 			$scope.video = $sce.trustAsResourceUrl(PlaylistService.getID());
 			console.log($scope.video);
 		}
-
-
 	}
 
 })();
