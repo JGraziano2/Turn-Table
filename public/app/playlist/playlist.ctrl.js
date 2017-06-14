@@ -5,9 +5,9 @@
         .module('app')
         .controller('PlaylistCtrl', PlaylistCtrl);
     
-    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject', '$window', 'ModalService'];
+    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject', '$window', 'ModalService', 'PlaylistService'];
     
-    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject, $window, ModalService){        
+    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject, $window, ModalService, PlaylistService){        
         
         $scope.playlists;        
         $scope.editPlaylists = editPlaylists;
@@ -123,8 +123,9 @@
             });
         }
 
-        function showSongModal() {
-            console.log('show modal');
+        function showSongModal(url) {
+            console.log('url: ' + url);
+            PlaylistService.setID(url);
             ModalService.showModal({
                 templateUrl: 'app/playlist/songModal.tpl.html',
                 controller: 'SongCtrl'

@@ -3,14 +3,16 @@
 
 	angular
 		.module('app')
-		.service('sharedProperties', playlistService)
+		.service('PlaylistService', PlaylistService)
 
-	function playlistService(){
+	function PlaylistService(){
 
 		var service = {
 			getID: getID,
-			setID: setID
-		}
+			setID: setID,
+		};
+
+		var songID = "";
 
 		return service;
 
