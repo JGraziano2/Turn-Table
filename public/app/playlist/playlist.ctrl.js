@@ -5,9 +5,9 @@
         .module('app')
         .controller('PlaylistCtrl', PlaylistCtrl);
     
-    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject'];
+    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject', '$window', 'ModalService'];
     
-    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject){        
+    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject, $window, ModalService){        
         
         $scope.playlists;        
         $scope.editPlaylists = editPlaylists;
@@ -15,6 +15,8 @@
         $scope.savePlaylists = savePlaylists;
         $scope.removePlaylist = removePlaylist;
         $scope.selectPlaylist = selectPlaylist;
+        $scope.logout = logout;
+        $scope.showSongModal = showSongModal;
         
         $scope.userSongs;
         $scope.songs = [];
@@ -112,6 +114,26 @@
             $scope.isEditingSongs = false;
             activate();
         }
-    }
-    
+
+        function logout(){
+            firebase.auth().signOut().then(function() {
+                $window.location.href = '/';
+            }, function(error) {
+              // An error happened.
+            });
+        }
+
+        function showSongModal() {
+            console.log('show modal');
+            ModalService.showModal({
+                templateUrl: 'app/playlist/songModal.tpl.html',
+                controller: 'SongCtrl'
+            }).then(function(modal){
+                modal.element.modal();
+                modal.close.then(function(result){
+                    console.log('closed: ' + result);
+                });
+            });
+        }
+    }  
 })();

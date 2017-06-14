@@ -62,7 +62,7 @@
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in songs">{{song.name}}</li>                
+                <li ng-repeat="song in songs" ng-click="">{{song.name}}</li>                
             </ol>
         </div>
         
@@ -86,11 +86,21 @@
         <div class="col-sm-4 col-sm-offset-4">
             <span class="glyphicon glyphicon-fast-backward" ng-click=""></span>
             <span class="glyphicon glyphicon-pause" ng-click=""></span>
-            <span class="glyphicon glyphicon-play" ng-click=""></span>
+            <span class="glyphicon glyphicon-play"  ng-click="showSongModal()"></span>
             <span class="glyphicon glyphicon-fast-forward" ng-click=""></span>
         </div>
         <div class="col-xs-1 pull-right">
-            <span class="glyphicon glyphicon-cog"></span>
+            <div class="btn-group dropup">
+              <button type="button" class="btn btn-default glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <!-- Dropdown menu links -->
+                <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
+                <br>
+                <button type="button" class="btn btn-default">Themes</button>
+              </ul>
+            </div>
         </div>
     </div>
 
