@@ -1,4 +1,19 @@
-/* Home Styles */
+/*       Global      */
+body{
+    background-color:#555   
+}
+
+.well {
+	background-color: #ddd;
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+}
+
+.glyphicon {
+    padding-bottom:2px;
+    color:#;
+}
+
+/*--- Home ---*/
 #auth {
     background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
     background-color: rgba(100,100,100,.5);
@@ -23,19 +38,25 @@
     background-color: red;
 }
 
+/*--- Modal ---*/
+.modal-footer #message {
+    color: red;
+}
+
 /* Playlist */
 #songlist{
     padding: 0;
-    max-height: 10em;
-    min-height: 10em;
+    max-height: 20em;
+    min-height: 20em;
     overflow-y: auto;   
 }
 
 #playlist-list{
     padding: 0;
-    max-height: 10em;
-    min-height: 10em;
+    max-height: 20em;
+    min-height: 20em;
     overflow-y: auto;
+    margin-right:0.4em;
 }
 
 #playlist-list li{
@@ -45,16 +66,32 @@
 }
 
 #playlist-list-header{
-    padding:0.1em;
-    margin-bottom:0.1em;
+    padding:0.4em;
+    margin-bottom:0.4em;
+    margin-right:0.4em;
 }
 
-#songlist-header{
-    margin-bottom:0.1em;
-    padding:0.1em;
+#songlist-header{    
+    padding:0.4em;
+    margin-bottom:0.4em;
 }
 
-/* Modal Styles */
-.modal-footer #message {
-    color: red;
+#spinny{
+    background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
+}
+
+.glyphicon{
+    font-size:1.5em;
+}
+
+.glyphicon-remove{
+    color:#e33;
+}
+
+.glyphicon-save{
+    color:#33e;
+}
+
+.glyphicon-cog{
+    font-size:2em;
 }
