@@ -51,7 +51,7 @@
             <ul>
                 <li ng-repeat="playlist in playlists">
                     <div class="form-group">
-						<input type="text" class="form-control" ng-model="playlist.name" placeholder="Name">
+						<input type="text" class="form-control" ng-model="playlist.name" placeholder="Name" autofocus>
 					</div>
                     <span class="glyphicon glyphicon-remove" ng-click="removePlaylist(playlist)" ng-show="isEditingPlaylists"></span>
                 </li>
@@ -70,7 +70,7 @@
             <ol>
                 <li ng-repeat="song in userSongs | filter: curPlaylistId">
                     <div class="form-group">
-						<input type="text" class="form-control" ng-model="song.name" placeholder="Name">
+						<input type="text" class="form-control" ng-model="song.name" placeholder="Name" autofocus>
 					</div>
                     <div class="form-group">
 						<input type="text" class="form-control" ng-model="song.url" placeholder="Url">
