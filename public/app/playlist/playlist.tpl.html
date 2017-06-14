@@ -64,9 +64,8 @@
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in userSongs | filter: curPlaylistId | orderBy:'index'" ng-click="showSongModal(song.url)">{{song.name}}
-                    
-                </li>  
+                <li ng-repeat="song in userSongs | filter: curPlaylistId | orderBy:'index'" ng-click="showSongModal(song.url)">{{song.name}}    
+                </li> 
             </ol>
         </div>
 
