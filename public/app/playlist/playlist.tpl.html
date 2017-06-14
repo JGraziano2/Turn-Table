@@ -4,6 +4,12 @@
         <!-- Spinny selector device goes here -->
         <img height="200px" width="200px" src="http://images.45cat.com/cher-halfbreed-mca-3.jpg">              
     </div>
+    
+    <!-- Song Video -->
+    
+    <div class="row">
+        <iframe width="560" height="315" src={{video}} frameborder="0" allowfullscreen id="vidFrame"></iframe>
+    </div>
 
     <div class="row">        
         <!-- Header section for playlist list w/ controls -->
@@ -62,7 +68,7 @@
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in userSongs | filter: curPlaylistId" ng-click="showSongModal(song.url)">{{song.name}}</li>
+                <li ng-repeat="song in userSongs | filter: curPlaylistId" ng-click="displayVid(song.url)">{{song.name}}</li>
             </ol>
         </div>
 
@@ -84,10 +90,12 @@
 
     <div class="row well" id="control-bar">
         <div class="col-sm-4 col-sm-offset-4">
-            <span class="glyphicon glyphicon-fast-backward" ng-click=""></span>
-            <span class="glyphicon glyphicon-pause" ng-click=""></span>
-            <span class="glyphicon glyphicon-play"  ng-click="showSongModal()"></span>
-            <span class="glyphicon glyphicon-fast-forward" ng-click=""></span>
+            <span class="glyphicon glyphicon-fast-backward" ng-click="playPrev()"></span>
+<!--
+            <span class="glyphicon glyphicon-pause" id="pauseButton" ng-click="pauseVideo()"></span>
+            <span class="glyphicon glyphicon-play" id="playButton" ng-click="playVideo()"></span>
+-->
+            <span class="glyphicon glyphicon-fast-forward" ng-click="playNext()"></span>
         </div>
         <div class="col-xs-1 pull-right">
             <div class="btn-group dropup">

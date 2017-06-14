@@ -5,9 +5,9 @@
         .module('app')
         .controller('PlaylistCtrl', PlaylistCtrl);
     
-    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject', '$window', 'ModalService', 'PlaylistService'];
+    PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject', '$window', 'ModalService', 'PlaylistService', '$sce'];
 
-    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject, $window, ModalService, PlaylistService){        
+    function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject, $window, ModalService, PlaylistService, $sce){        
 
         $scope.playlists;        
         $scope.editPlaylists = editPlaylists;
@@ -16,19 +16,23 @@
         $scope.removePlaylist = removePlaylist;
         $scope.selectPlaylist = selectPlaylist;
         $scope.logout = logout;
-        $scope.showSongModal = showSongModal;
+        $scope.displayVid = displayVid;
         $scope.userSongs;
         $scope.editSongs = editSongs;
         $scope.addSong = addSong;        
         $scope.saveSonglist = saveSonglist;
-        $scope.removeSong = removeSong;        
+        $scope.removeSong = removeSong; 
+        $scope.video;
+        $scope.currSong;
+        $scope.playNext = playNext;
+        $scope.playPrev = playPrev;
 
         $scope.isEditingPlaylists = false;
         $scope.isEditingSongs = false;
 
         $scope.curPlaylistId = 0;
 
-        activate();       
+        activate();
 
         function activate(){
             var ref = firebase.database().ref().child($stateParams.id).child('playlists');            
@@ -39,8 +43,11 @@
             });
 
             var ref = firebase.database().ref().child($stateParams.id).child('songs');  
-            $scope.userSongs = $firebaseArray(ref);   
-            console.log('songs', $scope.userSongs);
+            $scope.userSongs = $firebaseArray(ref); 
+            $scope.userSongs.$loaded().then(function(data) {
+                $scope.video = $sce.trustAsResourceUrl($scope.userSongs[0].url);
+                $scope.currSong = $scope.userSongs[0].url;
+            });
         }
 
         function editPlaylists(){
@@ -95,18 +102,42 @@
             });
         }
 
-        function showSongModal(url) {
-            console.log('url: ' + url);
+        function displayVid(url) {
             PlaylistService.setID(url);
-            ModalService.showModal({
-                templateUrl: 'app/playlist/songModal.tpl.html',
-                controller: 'SongCtrl'
-            }).then(function(modal){
-                modal.element.modal();
-                modal.close.then(function(result){
-                    console.log('closed: ' + result);
-                });
-            });
+            $scope.video = $sce.trustAsResourceUrl(PlaylistService.getID());
+            $scope.currSong = url;
+        }
+        
+        function playNext(){
+            for(var i = 0; i<$scope.userSongs.length; i++){
+                if($scope.userSongs[i].url == $scope.currSong){
+                    if( i == $scope.userSongs.length-1){
+                        displayVid($scope.userSongs[0].url);
+                        $scope.currSong = $scope.userSongs[0].url;
+                        break;
+                    } else {
+                    displayVid($scope.userSongs[i+1].url);
+                    $scope.currSong = $scope.userSongs[i+1].url;
+                    break;
+                    }
+                }
+            }
+        }
+        
+        function playPrev(){
+            for(var i = 0; i<$scope.userSongs.length; i++){
+                if($scope.userSongs[i].url == $scope.currSong){
+                    if( i == 0){
+                        displayVid($scope.userSongs[$scope.userSongs.length-1].url);
+                        $scope.currSong = $scope.userSongs[$scope.userSongs.length-1].url;
+                        break;
+                    } else {
+                    displayVid($scope.userSongs[i-1].url);
+                    $scope.currSong = $scope.userSongs[i-1].url;
+                    break;
+                    }
+                }
+            }
         }
     }  
 })();
