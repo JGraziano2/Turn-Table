@@ -25,10 +25,10 @@
          <!-- Header Section for song list w/  controls -->
         <div class="col-md-5 well" id="songlist-header">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <h4>Songs</h4>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <span class="glyphicon glyphicon-plus pull-right" ng-click="addSong()" ></span>
                     <span class="glyphicon glyphicon-pencil pull-right" ng-click="editSongs()" ng-hide="isEditingSongs"></span>
                     <span class="glyphicon glyphicon-floppy-disk pull-right" ng-click="saveSonglist()" ng-show="isEditingSongs"></span>
@@ -48,27 +48,27 @@
         </div>       
         
         <div class="col-md-3 col-md-offset-2 well" id="playlist-list" ng-show="isEditingPlaylists"> 
-            <ol>
+            <ul>
                 <li ng-repeat="playlist in playlists">
                     <div class="form-group">
 						<input type="text" class="form-control" ng-model="playlist.name" placeholder="Name">
 					</div>
                     <span class="glyphicon glyphicon-remove" ng-click="removePlaylist(playlist)" ng-show="isEditingPlaylists"></span>
                 </li>
-            </ol>
+            </ul>
         </div>
         <!--  -- - - - - -  -->
         
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in songs" ng-click="showSongModal('https://www.youtube.com/embed/qFLhGq0060w?ecver=1')">{{song.name}}</li>                
+                <li ng-repeat="song in songs track by song.$id" ng-click="showSongModal('https://www.youtube.com/embed/qFLhGq0060w?ecver=1')">{{song.name}}</li>
             </ol>
         </div>
         
         <div class="col-md-5 well" id="songlist" ng-show="isEditingSongs">
             <ol>
-                <li ng-repeat="song in songs">
+                <li ng-repeat="song in songs track by song.$id">
                     <div class="form-group">
 						<input type="text" class="form-control" ng-model="song.name" placeholder="Name">
 					</div>

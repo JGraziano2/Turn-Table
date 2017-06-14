@@ -6,9 +6,9 @@
         .controller('PlaylistCtrl', PlaylistCtrl);
     
     PlaylistCtrl.$inject = ['$scope', '$firebaseArray', '$stateParams', '$firebaseObject', '$window', 'ModalService', 'PlaylistService'];
-    
+
     function PlaylistCtrl($scope, $firebaseArray, $stateParams, $firebaseObject, $window, ModalService, PlaylistService){        
-        
+
         $scope.playlists;        
         $scope.editPlaylists = editPlaylists;
         $scope.addPlaylist = addPlaylist;
@@ -18,6 +18,7 @@
         $scope.logout = logout;
         $scope.showSongModal = showSongModal;
         
+        $scope.loadSongs = loadSongs;
         $scope.userSongs;
         $scope.songs = [];
         $scope.editSongs = editSongs;
@@ -33,38 +34,12 @@
         activate();       
         
         function activate(){
-            var ref = firebase.database().ref().child($stateParams.id);            
-            //get playlist array from database
-            $scope.playlists = $firebaseArray(ref.child('playlists'));
-            $scope.playlists.$loaded().then(function(data){
-                if($scope.playlists.length==0){
-                    addPlaylist();
-                }
-            }).catch(function(error){
-                console.log(error);
-            });
-            console.log("current playlist ID = " + curPlaylistId);
+            var ref = firebase.database().ref().child($stateParams.id).child('playlists');            
+            $scope.playlists = $firebaseArray(ref);
             
-            
-            //get song array from database and load into $scope
-            var ref = firebase.database().ref().child($stateParams.id);  
-            $scope.userSongs = $firebaseArray(ref.child('songs'));
-            $scope.userSongs.$loaded().then(function(data){
-                if($scope.userSongs.length<1){
-                    addSong();
-                }
-                //FIXME: $scope.userSongs is returning undefined!!!
-                console.log("$scope.userSongs: " + $scope.userSongs);
-                for(var i in $scope.userSongs){
-                    console.log($scope.userSongs[i].playlistId);
-                    if($scope.userSongs[i].playlistId === curPlaylistId){
-                        $scope.songs.push($scope.userSongs[i]);    
-                    }             
-                }      
-            }).catch(function(error){
-                console.log(error);
-            });            
-                             
+            var ref = firebase.database().ref().child($stateParams.id).child('songs');  
+            $scope.userSongs = $firebaseArray(ref);   
+            loadSongs();
         }
         
         function editPlaylists(){
@@ -90,29 +65,37 @@
         function selectPlaylist(playlist){
             $scope.songs=[];
             curPlaylistId = playlist.$id;    
-            activate();
+            loadSongs();
         }   
         
         function editSongs(){
             $scope.isEditingSongs = true;
         }
         
-        function addSong(){            
-            $scope.songs.push({name: "New Song", url: "", playlistId: curPlaylistId});
+        function addSong(){  
+            var newSong = {name: "New Song", url: "", playlistId: curPlaylistId};
+            $scope.userSongs.$add(newSong);
+            $scope.userSongs.$loaded().then(function(data){
+                console.log("Loading songs...")
+                loadSongs();
+            });            
         }
         
         function removeSong(song){
-            $scope.songs.$remove(song);
+            $scope.userSongs.$remove(song.$id);
         }        
             
         function saveSonglist(){            
-            for( var i in $scope.songs){
-                $scope.userSongs.$save($scope.songs[i]).catch(function(error){
-                    console.log(error);
-                });
-            }
             $scope.isEditingSongs = false;
-            activate();
+            loadSongs();
+        }
+        
+        function loadSongs(){
+            for(var i=0; i<$scope.userSongs.length; i++){
+                if($scope.userSongs[i].playlistId === curPlaylistId){
+                    $scope.songs.push($scope.userSongs[i]);    
+                }             
+            } 
         }
 
         function logout(){
