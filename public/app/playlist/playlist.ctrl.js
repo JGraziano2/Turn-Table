@@ -40,6 +40,7 @@
 
             var ref = firebase.database().ref().child($stateParams.id).child('songs');  
             $scope.userSongs = $firebaseArray(ref);   
+            console.log('songs', $scope.userSongs);
         }
 
         function editPlaylists(){
@@ -63,8 +64,7 @@
         }
 
         function selectPlaylist(playlist){
-            $scope.curPlaylistId = playlist.$id;  
-            console.log($scope.curPlaylistId);
+            $scope.curPlaylistId = playlist.$id;
         }   
 
         function editSongs(){
@@ -91,7 +91,7 @@
             firebase.auth().signOut().then(function() {
                 $window.location.href = '/';
             }, function(error) {
-              // An error happened.
+                console.log(error);
             });
         }
 
