@@ -1,11 +1,11 @@
 <div class="container">
-    
+
     <div class="row ">
         <!-- Spinny selector device goes here -->
         <img height="200px" width="200px" src="http://images.45cat.com/cher-halfbreed-mca-3.jpg">              
     </div>
-    
-     <div class="row">        
+
+    <div class="row">        
         <!-- Header section for playlist list w/ controls -->
         <div class="col-md-3 col-md-offset-2 well" id="playlist-list-header">             
             <div class="row">
@@ -19,10 +19,10 @@
                 </div>
             </div>            
         </div>
-         <!--- ------------------------------------------- ---->
-         
-         
-         <!-- Header Section for song list w/  controls -->
+        <!--- ------------------------------------------- ---->
+
+
+        <!-- Header Section for song list w/  controls -->
         <div class="col-md-5 well" id="songlist-header">
             <div class="row">
                 <div class="col-md-8">
@@ -35,53 +35,53 @@
                 </div>                
             </div>                
         </div>
-         <!--  --------------------------------------            -->
+        <!--  --------------------------------------            -->
     </div>
-    
-    
+
+
     <div class="row" >        
         <!-- Show/Edit Playlist List -->
         <div class="col-md-3 col-md-offset-2 well" id="playlist-list" ng-hide="isEditingPlaylists">
             <ul id="nav-tabs-wrapper" class="nav nav-tabs nav-pills nav-stacked">
-              <li class="active" class="btn btn-block btn-primary" ng-repeat="playlist in playlists" ng-click="selectPlaylist(playlist)">{{playlist.name}}</li>
+                <li class="active" class="btn btn-block btn-primary" ng-repeat="playlist in playlists" ng-click="selectPlaylist(playlist)">{{playlist.name}}</li>
             </ul>            
         </div>       
-        
+
         <div class="col-md-3 col-md-offset-2 well" id="playlist-list" ng-show="isEditingPlaylists"> 
             <ul>
                 <li ng-repeat="playlist in playlists">
                     <div class="form-group">
-						<input type="text" class="form-control" ng-model="playlist.name" placeholder="Name">
-					</div>
+                        <input type="text" class="form-control" ng-model="playlist.name" placeholder="Name" autofocus>
+                    </div>
                     <span class="glyphicon glyphicon-remove" ng-click="removePlaylist(playlist)" ng-show="isEditingPlaylists"></span>
                 </li>
             </ul>
         </div>
         <!--  -- - - - - -  -->
-        
+
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
                 <li ng-repeat="song in songs track by song.$id" ng-click="showSongModal(song.url)">{{song.name}}</li>
             </ol>
         </div>
-        
+
         <div class="col-md-5 well" id="songlist" ng-show="isEditingSongs">
             <ol>
-                <li ng-repeat="song in songs track by song.$id">
+                <li ng-repeat="song in userSongs | filter: curPlaylistId">
                     <div class="form-group">
-						<input type="text" class="form-control" ng-model="song.name" placeholder="Name">
-					</div>
+                        <input type="text" class="form-control" ng-model="song.name" placeholder="Name" autofocus>
+                    </div>
                     <div class="form-group">
-						<input type="text" class="form-control" ng-model="song.url" placeholder="Url">
-					</div>
-                    <span class="glyphicon glyphicon-remove" ng-click="removeSong()" ng-show="isEditingSongs"></span>
+                        <input type="text" class="form-control" ng-model="song.url" placeholder="Url">
+                    </div>
+                    <span class="glyphicon glyphicon-remove" ng-click="removeSong(song)" ng-show="isEditingSongs"></span>
                 </li>                
             </ol>
         </div>
         <!----- - - -  -- - -- - -- - -->
     </div>
-    
+
     <div class="row well" id="control-bar">
         <div class="col-sm-4 col-sm-offset-4">
             <span class="glyphicon glyphicon-fast-backward" ng-click=""></span>
@@ -91,15 +91,15 @@
         </div>
         <div class="col-xs-1 pull-right">
             <div class="btn-group dropup">
-              <button type="button" class="btn btn-default glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <!-- Dropdown menu links -->
-                <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
-                <br>
-                <button type="button" class="btn btn-default">Themes</button>
-              </ul>
+                <button type="button" class="btn btn-default glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <!-- Dropdown menu links -->
+                    <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
+                    <br>
+                    <button type="button" class="btn btn-default">Themes</button>
+                </ul>
             </div>
         </div>
     </div>
