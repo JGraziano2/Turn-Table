@@ -65,7 +65,7 @@
         function selectPlaylist(playlist){
             $scope.songs=[];
             curPlaylistId = playlist.$id;    
-            activate();
+            loadSongs();
         }   
         
         function editSongs(){
@@ -73,11 +73,12 @@
         }
         
         function addSong(){            
-            $scope.songs.push({name: "New Song", url: "", playlistId: curPlaylistId});
+            $scope.userSongs.$add({name: "New Song", url: "", playlistId: curPlaylistId});
+            loadSongs();
         }
         
         function removeSong(song){
-            $scope.songs.$remove(song);
+            $scope.userSongs.$remove(song);
         }        
             
         function saveSonglist(){            
