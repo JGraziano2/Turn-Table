@@ -49,82 +49,31 @@ ol ul{
 
 /* Playlist */
 #cog{
-    margin-top: -.2em;
+    margin-top: -.23em;
     font-size: 2em;
+    color: white;
+    text-decoration: none;
 }
 
 .controls{
-    font-size: 2em !important;
-    color: white !important;
+    font-size: 2em;
+    color: white;
     padding: .25em .5em 0 .5em;
     text-align: center;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 .controls:hover{
     cursor: pointer;
-    text-shadow: 0 0 3px white;
+    text-shadow: 0 0 4px white;
 }
 
-#songlist{
-    padding: 1em;
-    max-height: 20em;
-    min-height: 20em;
-    overflow-y: auto;
-    margin-bottom: 5.5em;
-}
-
-#songlist ol li:hover, #playlist-list ul li:hover{
-    cursor:pointer;
-    padding-left:0.5em;
-    box-shadow: 0 0 5px #999;
-}
-
-#playlist-list{
-    padding: 1em;
-    max-height: 20em;
-    min-height: 20em;
-    overflow-y: auto;
-    margin-right:0.75em;
-    margin-bottom: 5.5em;
-}
-
-#playlist-list li{
-    font-size:1em;
-    padding:.25em 1em;
-    line-height:1em;
-}
-
-#playlist-list-header{
-    padding:0.4em;
-    padding-left: 2em;
-    margin-bottom:0.4em;
-    margin-right:0.75em;
-    max-height:50px;
-    min-height:50px;
-}
-
-.navbar{
-    
-}
-
-#songlist-header{    
-    padding:0.4em;
-    padding-left: 2em;
-    margin-bottom:0.4em;
-    max-height:50px;
-    min-height:50px;
-}
-
-#spinny{
-    background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
-}
-
-.glyphicon{
+.edit-glyphs{
     font-size:1.5em;
+    margin-top: -.25em;
 }
 
-.glyphicon:hover {
+.edit-glyphs:hover {
     cursor: pointer;
     text-shadow: 0 0 2px #666;
 }
@@ -137,8 +86,55 @@ ol ul{
     color:#33e;
 }
 
-.glyphicon-cog{
-    font-size:2em;
+#playlist-list{
+    padding: 1em;
+    max-height: 20em;
+    min-height: 20em;
+    overflow-y: auto;
+}
+
+#playlist-list li{
+    font-size:1em;
+    padding:.25em 1em;
+    line-height:1em;
+}
+
+#playlist-list-header{
+    padding:0.4em;
+    padding-left: 2em;
+    margin-bottom:0.4em;
+    max-height:50px;
+    min-height:50px;
+}
+
+#songlist-header{    
+    padding:0.4em;
+    padding-left: 2.5em;
+    margin-bottom:0.4em;
+    margin-right: 2em;
+    margin-left: -2em;
+    max-height:50px;
+    min-height:50px;
+}
+
+#songlist ol li:hover, #playlist-list ul li:hover{
+    cursor:pointer;
+    padding-left:0.5em;
+    box-shadow: 0 0 5px #999;
+}
+
+#songlist{
+    padding: 1em;
+    max-height: 20em;
+    min-height: 20em;
+    overflow-y: auto;
+    margin-bottom: 5.5em;
+    margin-left: -2em;
+    margin-right: 2em;
+}
+
+#spinny{
+    background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
 }
 
 #vidFrame{
