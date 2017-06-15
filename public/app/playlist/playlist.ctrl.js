@@ -38,6 +38,7 @@
 
         $scope.curPlaylistId = 0;
         var playlistLength;
+        $scope.currID;
 
         activate();
 
@@ -54,8 +55,13 @@
             var ref = firebase.database().ref().child($stateParams.id).child('songs');  
             $scope.userSongs = $firebaseArray(ref); 
             $scope.userSongs.$loaded().then(function(data) {
-                $scope.video = $sce.trustAsResourceUrl($scope.userSongs[0].url);
-                $scope.currSong = $scope.userSongs[0].url;
+                for(var i = 0; i < $scope.userSongs.length; i++){
+                    if($scope.userSongs[i].playlistId == $scope.curPlaylistId && $scope.userSongs[i].index == 1)
+                        displayVid($scope.userSongs[i]);
+                }
+                // $scope.video = $sce.trustAsResourceUrl($scope.userSongs[0].url);
+                // $scope.currSong = $scope.userSongs[0].url; 
+                // $scope.currID = $scope.userSongs[0].$id;
             });
         }
 
@@ -119,7 +125,7 @@
             }
             $scope.isEditingSongs = false;
         }
-s
+
         function moveSongUp(song){
             var curSongId = song.$id, curSongIndex = song.index;
             var prevSongId, prevSongIndex;            
@@ -166,41 +172,49 @@ s
             });
         }
 
-        function displayVid(url) {
-            PlaylistService.setID(url);
+        function displayVid(song) {
+            $scope.currID = song.$id;
+            PlaylistService.setID(song.url);
             $scope.video = $sce.trustAsResourceUrl(PlaylistService.getID());
-            $scope.currSong = url;
+            $scope.currSong = song.url;
         }
         
         function playNext(){
+            var currPlaylistID, currSongIndex;
             for(var i = 0; i<$scope.userSongs.length; i++){
-                if($scope.userSongs[i].url == $scope.currSong){
-                    if( i == $scope.userSongs.length-1){
-                        displayVid($scope.userSongs[0].url);
-                        $scope.currSong = $scope.userSongs[0].url;
-                        break;
-                    } else {
-                    displayVid($scope.userSongs[i+1].url);
-                    $scope.currSong = $scope.userSongs[i+1].url;
-                    break;
-                    }
+                if($scope.userSongs[i].$id == $scope.currID){
+                    currPlaylistID = $scope.userSongs[i].playlistId;
+                    currSongIndex = $scope.userSongs[i].index;
                 }
+            }
+
+            if(currSongIndex != playlistLength){
+                for(var i = 0; i < $scope.userSongs.length; i++){
+                    if($scope.userSongs[i].index == currSongIndex+1 && $scope.userSongs[i].playlistId == currPlaylistID){
+                        displayVid($scope.userSongs[i]);
+                        break;
+                    }
+                }                
             }
         }
         
         function playPrev(){
+            var currPlaylistID, currSongIndex;
             for(var i = 0; i<$scope.userSongs.length; i++){
-                if($scope.userSongs[i].url == $scope.currSong){
-                    if( i == 0){
-                        displayVid($scope.userSongs[$scope.userSongs.length-1].url);
-                        $scope.currSong = $scope.userSongs[$scope.userSongs.length-1].url;
-                        break;
-                    } else {
-                    displayVid($scope.userSongs[i-1].url);
-                    $scope.currSong = $scope.userSongs[i-1].url;
-                    break;
-                    }
+                if($scope.userSongs[i].$id == $scope.currID){
+                    currPlaylistID = $scope.userSongs[i].playlistId;
+                    currSongIndex = $scope.userSongs[i].index;
                 }
+            }
+
+            if(currSongIndex != 1){
+                for(var i = 0; i < $scope.userSongs.length; i++){
+                    if($scope.userSongs[i].index == currSongIndex-1 && $scope.userSongs[i].playlistId == currPlaylistID){
+                        console.log('we here');
+                        displayVid($scope.userSongs[i]);
+                        break;
+                    }
+                }                
             }
         }
     }  

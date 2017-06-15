@@ -60,8 +60,6 @@
                         <input type="text" class="form-control" ng-model="playlist.name" placeholder="Name" autofocus>
                     </div>
                     <span class="glyphicon glyphicon-remove" ng-click="removePlaylist(playlist)" ng-show="isEditingPlaylists"></span>
-                    <span class="glyphicon glyphicon-arrow-up" ng-click="movePlaylistUp(playlist)"></span>
-                    <span class="glyphicon glyphicon-arrow-down" ng-click="movePlaylistDown(playlist)"></span>
                 </li>
             </ul>
         </div>
@@ -70,7 +68,7 @@
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in userSongs | filter: curPlaylistId" ng-click="displayVid(song.url)">{{song.name}}</li>
+                <li ng-repeat="song in userSongs | filter: curPlaylistId | orderBy:'index'" ng-click="displayVid(song)">{{song.name}}</li>
             </ol>
         </div>
 
