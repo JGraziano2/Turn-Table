@@ -88,28 +88,28 @@
         <!----- - - -  -- - -- - -- - -->
     </div>
 
-    <div class="row well" id="control-bar">
-        <div class="col-sm-4 col-sm-offset-4">
-            <span class="glyphicon glyphicon-fast-backward" ng-click="playPrev()"></span>
-<!--
-            <span class="glyphicon glyphicon-pause" id="pauseButton" ng-click="pauseVideo()"></span>
-            <span class="glyphicon glyphicon-play" id="playButton" ng-click="playVideo()"></span>
--->
-            <span class="glyphicon glyphicon-fast-forward" ng-click="playNext()"></span>
-        </div>
-        <div class="col-xs-1 pull-right">
-            <div class="btn-group dropup">
-                <button type="button" class="btn btn-default glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <!-- Dropdown menu links -->
-                    <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
-                    <br>
-                    <button type="button" class="btn btn-default">Themes</button>
-                </ul>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" id="control-bar">
+        <div class="container-fluid text-center">
+            <div class="col-sm-4 col-sm-offset-4">
+                <span class="glyphicon glyphicon-fast-backward controls" ng-click="playPrev()"></span>
+                <span class="glyphicon glyphicon-pause controls" id="pauseButton" ng-click=""></span>
+                <span class="glyphicon glyphicon-play controls" id="playButton" ng-click=""></span>
+                <span class="glyphicon glyphicon-fast-forward controls" ng-click="playNext()"></span>
+            </div>
+            <div class="col-xs-1 pull-right">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-link glyphicon glyphicon-cog dropdown-toggle controls" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="cog">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- Dropdown menu links -->
+                        <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
+                        <br>
+                        <button type="button" class="btn btn-default">Themes</button>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
 </div>

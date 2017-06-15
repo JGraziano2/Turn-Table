@@ -44,6 +44,23 @@ body{
 }
 
 /* Playlist */
+#cog{
+    padding-top: -.25em;
+}
+
+.controls{
+    font-size: 2em !important;
+    color: white !important;
+    padding: .25em .5em 0 .5em;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+.controls:hover{
+    cursor: pointer;
+    text-shadow: 0 0 3px white;
+}
+
 #songlist{
     padding: 1em;
     max-height: 20em;
