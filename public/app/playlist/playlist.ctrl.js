@@ -38,6 +38,7 @@
 
         $scope.curPlaylistId = 0;
         var playlistLength;
+        $scope.currID;
 
         activate();
 
@@ -45,17 +46,14 @@
             var ref = firebase.database().ref().child($stateParams.id).child('playlists');            
             $scope.playlists = $firebaseArray(ref);
 
-            $scope.playlists.$loaded().then(function(data) {
-                if($scope.playlists.length==0) addPlaylist();
-                $scope.curPlaylistId = $scope.playlists[0].$id;
-                playlistLength = $scope.playlists[0].length;
-            });
-
             var ref = firebase.database().ref().child($stateParams.id).child('songs');  
             $scope.userSongs = $firebaseArray(ref); 
             $scope.userSongs.$loaded().then(function(data) {
-                $scope.video = $sce.trustAsResourceUrl($scope.userSongs[0].url);
-                $scope.currSong = $scope.userSongs[0].url;
+                for(var i = 0; i < $scope.userSongs.length; i++){
+                    if($scope.userSongs[i].playlistId == $scope.curPlaylistId && $scope.userSongs[i].index == 1){
+                        displayVid($scope.userSongs[i]);
+                    }                       
+                }
             });
         }
 
@@ -67,7 +65,7 @@
             $scope.playlists.$loaded().then(function(data){
                 $scope.playlists.$add({name: 'New Playlist', length: 0});
                 $scope.curPlaylistId = $scope.playlists[0].$id;
-            });    
+            });
             activate();
         }
 
@@ -100,7 +98,7 @@
                 for(var i=0; i<$scope.playlists.length; i++){
                     if($scope.playlists[i].$id===$scope.curPlaylistId){
                         playlist=$scope.playlists[i];
-                        $scope.playlists[i].length+=1;
+                        $scope.playlists[i].length++;
                         playlistLength = $scope.playlists[i].length;
                         savePlaylists();
                     }  
@@ -110,7 +108,18 @@
         }
 
         function removeSong(song){
+            var playlist;
+            $scope.playlists.$loaded().then( function(data){
+                for(var i=0; i<$scope.playlists.length; i++){
+                    if($scope.playlists[i].$id===$scope.curPlaylistId){
+                        playlist=$scope.playlists[i];
+                        $scope.playlists[i].length--;
+                        playlistLength = $scope.playlists[i].length;
+                        savePlaylists();
+                    }  
+                }
             $scope.userSongs.$remove(song);
+            });
         }        
 
         function saveSonglist(){
@@ -119,7 +128,7 @@
             }
             $scope.isEditingSongs = false;
         }
-        
+
         function moveSongUp(song){
             var curSongId = song.$id, curSongIndex = song.index;
             var prevSongId, prevSongIndex;            
@@ -166,42 +175,67 @@
             });
         }
 
-        function displayVid(url) {
-            PlaylistService.setID(url);
+        function displayVid(song) {
+            $scope.currID = song.$id;
+            PlaylistService.setID(song.url);
             $scope.video = $sce.trustAsResourceUrl(PlaylistService.getID());
-            $scope.currSong = url;
+            $scope.currSong = song.url;
         }
         
         function playNext(){
+            var currPlaylistID, currSongIndex;
             for(var i = 0; i<$scope.userSongs.length; i++){
-                if($scope.userSongs[i].url == $scope.currSong){
-                    if( i == $scope.userSongs.length-1){
-                        displayVid($scope.userSongs[0].url);
-                        $scope.currSong = $scope.userSongs[0].url;
-                        break;
-                    } else {
-                    displayVid($scope.userSongs[i+1].url);
-                    $scope.currSong = $scope.userSongs[i+1].url;
-                    break;
-                    }
+                if($scope.userSongs[i].$id == $scope.currID){
+                    currPlaylistID = $scope.userSongs[i].playlistId;
+                    currSongIndex = $scope.userSongs[i].index;
                 }
+            }
+            if(currSongIndex != playlistLength){
+                for(var i = 0; i < $scope.userSongs.length; i++){
+                    if($scope.userSongs[i].index == currSongIndex+1 && $scope.userSongs[i].playlistId == currPlaylistID){
+                        displayVid($scope.userSongs[i]);
+                        break;
+                    }
+                }                
             }
         }
         
         function playPrev(){
+            var currPlaylistID, currSongIndex;
             for(var i = 0; i<$scope.userSongs.length; i++){
-                if($scope.userSongs[i].url == $scope.currSong){
-                    if( i == 0){
-                        displayVid($scope.userSongs[$scope.userSongs.length-1].url);
-                        $scope.currSong = $scope.userSongs[$scope.userSongs.length-1].url;
+                if($scope.userSongs[i].$id == $scope.currID){
+                    currPlaylistID = $scope.userSongs[i].playlistId;
+                    currSongIndex = $scope.userSongs[i].index;
+                }
+            }
+
+            if(currSongIndex != 1){
+                for(var i = 0; i < $scope.userSongs.length; i++){
+                    if($scope.userSongs[i].index == currSongIndex-1 && $scope.userSongs[i].playlistId == currPlaylistID){
+                        console.log('we here');
+                        displayVid($scope.userSongs[i]);
                         break;
-                    } else {
-                    displayVid($scope.userSongs[i-1].url);
-                    $scope.currSong = $scope.userSongs[i-1].url;
-                    break;
                     }
                 }
             }
         }
+        
+        function getRandomSequence(n){
+            var retArr = [];
+            for(var i=1; i<=n; i++){
+                retArr.push(i);
+            }
+            for(var i=0; i<n*2; i++){
+                var swapIndex = parseInt(Math.random()*n);
+                if(swapIndex<retArr.length&&swapIndex>=0){
+                    //console.log(swapIndex)
+                    var swapVal = retArr[swapIndex];
+                    retArr[swapIndex] = retArr[swapIndex+1];
+                    retArr[swapIndex+1] = swapVal; 
+                }                
+            }
+            return retArr;
+        }
+        //console.log("getRandomSequence="+getRandomSequence(5));
     }  
 })();
