@@ -4,7 +4,7 @@ body{
 }
 
 .well {
-	background-color: #ddd;
+    background-color: #ddd;
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
 }
 
@@ -54,7 +54,7 @@ body{
 #songlist ol li:hover, #playlist-list ul li:hover{
     cursor:pointer;
     padding-left:0.5em;
-    background-color:#999;
+    box-shadow: 0 0 5px #999;
 }
 
 #playlist-list{
@@ -92,6 +92,11 @@ body{
 
 .glyphicon{
     font-size:1.5em;
+}
+
+.glyphicon:hover {
+    cursor: pointer;
+    text-shadow: 0 0 2px #666;
 }
 
 .glyphicon-remove{
