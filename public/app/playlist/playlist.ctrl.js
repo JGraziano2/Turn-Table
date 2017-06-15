@@ -178,8 +178,11 @@
         function displayVid(song) {
             $scope.currID = song.$id;
             PlaylistService.setID(song.url);
-            $scope.video = $sce.trustAsResourceUrl(PlaylistService.getID());
+            // $scope.video = $sce.trustAsResourceUrl(PlaylistService.getID());
             $scope.currSong = song.url;
+            // $scope.video = $sce.trustAsResourceUrl(song.url);
+            // $scope.video = $sce.trustAsResourceUrl(convertUrl(song.url));
+            $scope.video = $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + song.url.slice(32) + "?ecver=1");
         }
         
         function playNext(){
