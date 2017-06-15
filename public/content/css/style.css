@@ -45,7 +45,7 @@ body{
 
 /* Playlist */
 #cog{
-    margin-top: -.2em;
+    margin-top: -.23em;
     font-size: 2em;
     color: white;
     text-decoration: none;
@@ -61,12 +61,12 @@ body{
 
 .controls:hover{
     cursor: pointer;
-    text-shadow: 0 0 3px white;
+    text-shadow: 0 0 4px white;
 }
 
 .edit-glyphs{
     font-size:1.5em;
-    margin-top: -.3em;
+    margin-top: -.25em;
 }
 
 .edit-glyphs:hover {
@@ -87,8 +87,6 @@ body{
     max-height: 20em;
     min-height: 20em;
     overflow-y: auto;
-    margin-right:0.75em;
-    margin-bottom: 5.5em;
 }
 
 #playlist-list li{
@@ -101,7 +99,6 @@ body{
     padding:0.4em;
     padding-left: 2em;
     margin-bottom:0.4em;
-    margin-right:0.75em;
     max-height:50px;
     min-height:50px;
 }
@@ -116,6 +113,12 @@ body{
     min-height:50px;
 }
 
+#songlist ol li:hover, #playlist-list ul li:hover{
+    cursor:pointer;
+    padding-left:0.5em;
+    box-shadow: 0 0 5px #999;
+}
+
 #songlist{
     padding: 1em;
     max-height: 20em;
@@ -124,12 +127,6 @@ body{
     margin-bottom: 5.5em;
     margin-left: -2em;
     margin-right: 2em;
-}
-
-#songlist ol li:hover, #playlist-list ul li:hover{
-    cursor:pointer;
-    padding-left:0.5em;
-    box-shadow: 0 0 5px #999;
 }
 
 #spinny{
