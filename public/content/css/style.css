@@ -108,7 +108,7 @@ body{
     padding-left: 2.5em;
     margin-bottom:0.4em;
     margin-right: 2em;
-    margin-left: -2em;
+    margin-left: -1.5em;
     max-height:50px;
     min-height:50px;
 }
@@ -125,7 +125,7 @@ body{
     min-height: 20em;
     overflow-y: auto;
     margin-bottom: 5.5em;
-    margin-left: -2em;
+    margin-left: -1.5em;
     margin-right: 2em;
 }
 
