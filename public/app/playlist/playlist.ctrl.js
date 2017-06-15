@@ -50,7 +50,7 @@
             $scope.userSongs = $firebaseArray(ref); 
             $scope.userSongs.$loaded().then(function(data) {
                 for(var i = 0; i < $scope.userSongs.length; i++){
-                    if($scope.userSongs[i].playlistId == $scope.curPlaylistId && $scope.userSongs[i].index == 1){
+                    if($scope.userSongs[i].playlistId == $scope.playlists[0].$id && $scope.userSongs[i].index == 1){
                         displayVid($scope.userSongs[i]);
                     }                       
                 }

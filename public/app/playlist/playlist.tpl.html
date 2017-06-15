@@ -53,7 +53,7 @@
                 </div>
                 <div class="well" id="songlist" ng-hide="isEditingSongs">
                     <ol>
-                        <li ng-repeat="song in userSongs | filter: curPlaylistId" ng-click="displayVid(song.url)">{{song.name}}</li>
+                        <li ng-repeat="song in userSongs | filter: curPlaylistId | orderBy:'index'" ng-click="displayVid(song)">{{song.name}}</li>
                     </ol>
                 </div>
 
