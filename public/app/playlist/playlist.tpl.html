@@ -4,6 +4,12 @@
         <!-- Spinny selector device goes here -->
         <img height="200px" width="200px" src="http://images.45cat.com/cher-halfbreed-mca-3.jpg">              
     </div>
+    
+    <!-- Song Video -->
+    
+    <div class="row">
+        <iframe width="750" height="422" src={{video}} frameborder="0" allowfullscreen id="vidFrame"></iframe>
+    </div>
 
     <div class="row">        
         <!-- Header section for playlist list w/ controls -->
@@ -64,9 +70,7 @@
         <!-- Show/Edit Songlist -->
         <div class="col-md-5 well" id="songlist" ng-hide="isEditingSongs">
             <ol>
-                <li ng-repeat="song in userSongs | filter: curPlaylistId" ng-click="showSongModal(song.url)">{{song.name}}</li>
-                <li ng-repeat="song in userSongs | filter: curPlaylistId | orderBy:'index'" ng-click="showSongModal(song.url)">{{song.name}}    
-                </li> 
+                <li ng-repeat="song in userSongs | filter: curPlaylistId" ng-click="displayVid(song.url)">{{song.name}}</li>
             </ol>
         </div>
 
@@ -88,26 +92,28 @@
         <!----- - - -  -- - -- - -- - -->
     </div>
 
-    <div class="row well" id="control-bar">
-        <div class="col-sm-4 col-sm-offset-4">
-            <span class="glyphicon glyphicon-fast-backward" ng-click=""></span>
-            <span class="glyphicon glyphicon-pause" ng-click=""></span>
-            <span class="glyphicon glyphicon-play"  ng-click="showSongModal()"></span>
-            <span class="glyphicon glyphicon-fast-forward" ng-click=""></span>
-        </div>
-        <div class="col-xs-1 pull-right">
-            <div class="btn-group dropup">
-                <button type="button" class="btn btn-default glyphicon glyphicon-cog dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <ul class="dropdown-menu">
-                    <!-- Dropdown menu links -->
-                    <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
-                    <br>
-                    <button type="button" class="btn btn-default">Themes</button>
-                </ul>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" id="control-bar">
+        <div class="container-fluid text-center">
+            <div class="col-sm-4 col-sm-offset-4">
+                <span class="glyphicon glyphicon-fast-backward controls" ng-click="playPrev()"></span>
+                <span class="glyphicon glyphicon-pause controls" id="pauseButton" ng-click=""></span>
+                <span class="glyphicon glyphicon-play controls" id="playButton" ng-click=""></span>
+                <span class="glyphicon glyphicon-fast-forward controls" ng-click="playNext()"></span>
+            </div>
+            <div class="col-xs-1 pull-right">
+                <div class="btn-group dropup">
+                    <button type="button" class="btn btn-link glyphicon glyphicon-cog dropdown-toggle controls" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="cog">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <!-- Dropdown menu links -->
+                        <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
+                        <br>
+                        <button type="button" class="btn btn-default">Themes</button>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
 
 </div>
