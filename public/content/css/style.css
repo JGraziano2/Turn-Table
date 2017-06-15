@@ -47,14 +47,16 @@ body{
 #cog{
     margin-top: -.2em;
     font-size: 2em;
+    color: white;
+    text-decoration: none;
 }
 
 .controls{
-    font-size: 2em !important;
-    color: white !important;
+    font-size: 2em;
+    color: white;
     padding: .25em .5em 0 .5em;
     text-align: center;
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 .controls:hover{
@@ -62,18 +64,22 @@ body{
     text-shadow: 0 0 3px white;
 }
 
-#songlist{
-    padding: 1em;
-    max-height: 20em;
-    min-height: 20em;
-    overflow-y: auto;
-    margin-bottom: 5.5em;
+.edit-glyphs{
+    font-size:1.5em;
+    margin-top: -.3em;
 }
 
-#songlist ol li:hover, #playlist-list ul li:hover{
-    cursor:pointer;
-    padding-left:0.5em;
-    box-shadow: 0 0 5px #999;
+.edit-glyphs:hover {
+    cursor: pointer;
+    text-shadow: 0 0 2px #666;
+}
+
+.glyphicon-remove{
+    color:#e33;
+}
+
+.glyphicon-save{
+    color:#33e;
 }
 
 #playlist-list{
@@ -100,41 +106,34 @@ body{
     min-height:50px;
 }
 
-.navbar{
-    
-}
-
 #songlist-header{    
     padding:0.4em;
-    padding-left: 2em;
+    padding-left: 2.5em;
     margin-bottom:0.4em;
+    margin-right: 2em;
+    margin-left: -2em;
     max-height:50px;
     min-height:50px;
 }
 
+#songlist{
+    padding: 1em;
+    max-height: 20em;
+    min-height: 20em;
+    overflow-y: auto;
+    margin-bottom: 5.5em;
+    margin-left: -2em;
+    margin-right: 2em;
+}
+
+#songlist ol li:hover, #playlist-list ul li:hover{
+    cursor:pointer;
+    padding-left:0.5em;
+    box-shadow: 0 0 5px #999;
+}
+
 #spinny{
     background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
-}
-
-.glyphicon{
-    font-size:1.5em;
-}
-
-.glyphicon:hover {
-    cursor: pointer;
-    text-shadow: 0 0 2px #666;
-}
-
-.glyphicon-remove{
-    color:#e33;
-}
-
-.glyphicon-save{
-    color:#33e;
-}
-
-.glyphicon-cog{
-    font-size:2em;
 }
 
 #vidFrame{

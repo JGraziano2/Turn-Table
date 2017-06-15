@@ -119,7 +119,7 @@
             }
             $scope.isEditingSongs = false;
         }
-s
+        
         function moveSongUp(song){
             var curSongId = song.$id, curSongIndex = song.index;
             var prevSongId, prevSongIndex;            
