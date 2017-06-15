@@ -1,18 +1,18 @@
 (function() {
-	'use strict';
+    'use strict';
 
-	angular
-		.module('app')
-		.config(config);
+    angular
+        .module('app')
+        .config(config);
 
-	config.$inject = ['$stateProvider'];
+    config.$inject = ['$stateProvider'];
 
-	function config($stateProvider) {
-		$stateProvider
-			.state('home', {
-				url: '/',
-				templateUrl: 'app/auth/templates/home.tpl.html',
-				controller: 'HomeCtrl'
-			});
-	}
+    function config($stateProvider) {
+        $stateProvider
+            .state('home', {
+            url: '/',
+            templateUrl:'app/auth/templates/home.tpl.html',
+            controller: 'HomeCtrl'
+        });
+    }
 })();

@@ -17,6 +17,7 @@
         $scope.selectPlaylist = selectPlaylist;
 
         $scope.logout = logout;
+        
         $scope.showSongModal = showSongModal;
 
         $scope.userSongs;
@@ -27,9 +28,6 @@
 
         $scope.moveSongUp = moveSongUp;
         $scope.moveSongDown = moveSongDown;
-        $scope.movePlaylistUp = movePlaylistUp;
-        $scope.movePlaylistDown = movePlaylistDown;
-
 
         $scope.isEditingPlaylists = false;
         $scope.isEditingSongs = false;
@@ -66,6 +64,9 @@
         }
 
         function removePlaylist(playlist){
+            for(var i=0; i<$scope.userSongs.length; i++){
+                if($scope.userSongs[i].playlistId==playlist.$id) $scope.userSongs.$remove($scope.userSongs[i]);
+            }
             $scope.playlists.$remove(playlist);
         }
 
@@ -90,23 +91,16 @@
         function addSong(){
             var playlist;
             $scope.playlists.$loaded().then( function(data){
-//                for(var i=0; i<$scope.playlists.length; i++){
-//                    if($scope.playlists[i].$id===$scope.curPlaylistId){
-//                        playlist=$scope.playlists[i];
-//                        $scope.playlists[i].length+=1;
-//                        savePlaylists();
-//                    }  
-//                }
-//                $scope.userSongs.$add({name: "New Song", url: "", playlistId: $scope.curPlaylistId, index:playlist.length});
-            });
-            for(var i=0; i<$scope.playlists.length; i++){
+                for(var i=0; i<$scope.playlists.length; i++){
                     if($scope.playlists[i].$id===$scope.curPlaylistId){
                         playlist=$scope.playlists[i];
                         $scope.playlists[i].length+=1;
+                        playlistLength = $scope.playlists[i].length;
                         savePlaylists();
                     }  
                 }
-            $scope.userSongs.$add({name: "New Song", url: "", playlistId: $scope.curPlaylistId, index:playlist.length});
+                $scope.userSongs.$add({name: "New Song", url: "", playlistId: $scope.curPlaylistId, index:playlist.length});
+            });
         }
 
         function removeSong(song){
@@ -121,46 +115,41 @@
         }
 
         function moveSongUp(song){
-
+            var curSongId = song.$id, curSongIndex = song.index;
+            var prevSongId, prevSongIndex;            
+            if(curSongIndex!=1){ 
+                for(var i=0; i<$scope.userSongs.length; i++){
+                    if($scope.userSongs[i].index==curSongIndex-1){
+                        prevSongId = $scope.userSongs[i].$id;
+                        prevSongIndex = $scope.userSongs[i].index;
+                    }
+                }
+                for(var i=0; i<$scope.userSongs.length; i++){
+                    if($scope.userSongs[i].$id==curSongId) $scope.userSongs[i].index = prevSongIndex;
+                    if($scope.userSongs[i].$id==prevSongId) $scope.userSongs[i].index = curSongIndex;
+                }                              
+            }else{
+                console.log("Out of bounds movement attempt!!!!")
+            }
         }
 
         function moveSongDown(song){
-            console.log("movingSong DOWN!");
-            var curIndex = 0;
-            for(var i=0; i<$scope.userSongs.length; i++){
-                if($scope.userSongs[i].$id==song.$id){
-                    curIndex = $scope.userSongs[i].index+1;     
-                    $scope.userSongs[i].index = -1;
-                    console.log("$scope.userSongs[i] = "+$scope.userSongs[i]);
-                }
-            }
-            console.log("curIndex = "+curIndex);
-            if(curIndex<playlistLength){                
+            var curSongId = song.$id, curSongIndex = song.index;
+            var nextSongId, nextSongIndex;            
+            if(curSongIndex!=playlistLength){ 
                 for(var i=0; i<$scope.userSongs.length; i++){
-                    if($scope.userSongs[i].index==curIndex && $scope.userSongs[i].playlistId==$scope.curPlaylistId){
-                        $scope.userSongs[i].index--;
+                    if($scope.userSongs[i].index==curSongIndex+1){
+                        nextSongId = $scope.userSongs[i].$id;
+                        nextSongIndex = $scope.userSongs[i].index;
                     }
                 }
                 for(var i=0; i<$scope.userSongs.length; i++){
-                    if($scope.userSongs[i].index==-1 && $scope.userSongs[i].playlistId==$scope.curPlaylistId){
-                        $scope.userSongs[i].index=curIndex;
-                    }
-                }
-                for(var i=0; i<$scope.userSongs.length; i++){
-                $scope.userSongs.$save($scope.userSongs[i]);   
-                }                
+                    if($scope.userSongs[i].$id==curSongId) $scope.userSongs[i].index = nextSongIndex;
+                    if($scope.userSongs[i].$id==nextSongId) $scope.userSongs[i].index = curSongIndex;
+                }                              
             }else{
                 console.log("Out of bounds movement attempt!!!!")
-            } 
-
-        }
-
-        function movePlaylistUp(playlist){
-
-        }
-
-        function movePlaylistDown(playlist){
-
+            }
         }
 
         function logout(){
