@@ -45,7 +45,8 @@ body{
 
 /* Playlist */
 #cog{
-    padding-top: -.25em;
+    margin-top: -.2em;
+    font-size: 2em;
 }
 
 .controls{
@@ -66,6 +67,7 @@ body{
     max-height: 20em;
     min-height: 20em;
     overflow-y: auto;
+    margin-bottom: 5.5em;
 }
 
 #songlist ol li:hover, #playlist-list ul li:hover{
@@ -79,7 +81,8 @@ body{
     max-height: 20em;
     min-height: 20em;
     overflow-y: auto;
-    margin-right:0.4em;
+    margin-right:0.75em;
+    margin-bottom: 5.5em;
 }
 
 #playlist-list li{
@@ -90,14 +93,20 @@ body{
 
 #playlist-list-header{
     padding:0.4em;
+    padding-left: 2em;
     margin-bottom:0.4em;
-    margin-right:0.4em;
+    margin-right:0.75em;
     max-height:50px;
     min-height:50px;
 }
 
+.navbar{
+    
+}
+
 #songlist-header{    
     padding:0.4em;
+    padding-left: 2em;
     margin-bottom:0.4em;
     max-height:50px;
     min-height:50px;
@@ -121,4 +130,10 @@ body{
 
 .glyphicon-cog{
     font-size:2em;
+}
+
+#vidFrame{
+    display: block;
+    margin: auto;
+    margin-bottom: 2em;
 }
