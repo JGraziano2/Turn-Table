@@ -92,9 +92,10 @@
             $scope.isEditingPlaylists = false;
         }
 
-        function selectPlaylist(playlist){
-            console.log(playlist);
+        function selectPlaylist(playlist, $event){
+            $(".btn").removeClass('active');
             $scope.currentPlaylist = playlist;
+            $(event.target).addClass('active');
         }
 
         /*-- SONG METHODS --*/

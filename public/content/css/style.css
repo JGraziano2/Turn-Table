@@ -1,4 +1,5 @@
 /*--- Global ---*/
+
 body{
     background-color:#555;
     overflow-x: hidden;
@@ -68,7 +69,7 @@ ol ul{
 
 .edit-glyphs:hover {
     cursor: pointer;
-    text-shadow: 0 0 2px #666;
+    text-shadow: 0 0 4px white;
 }
 
 .glyphicon-remove{
@@ -91,13 +92,6 @@ ol ul{
     padding:.25em 1em;
     line-height:1em;
     color: black;
-}
-
-#playlist-list li button:focus {
-    color: white;
-    background:#555;
-    box-shadow: 0 0 15px white;
-    text-shadow: 2px 2px 5px black;
 }
 
 #playlist-list-header{
@@ -125,8 +119,11 @@ ol ul{
 #songlist ol li:hover, #playlist-list ul li:hover{
     cursor:pointer;
     padding-left:0.5em;
-    box-shadow: 0 0 5px #999;
     color: white;
+}
+
+#songlist ol li:hover {
+    box-shadow: 0 0 5px #999;
 }
 
 #songlist{
@@ -187,4 +184,11 @@ ol ul{
     width: 67%;
     height: 67%;
     
+}
+
+.active {
+    color: white !important;
+    background:#555 !important;
+    box-shadow: 0 0 15px white;
+    text-shadow: 2px 2px 5px black;
 }
