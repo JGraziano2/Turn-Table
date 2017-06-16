@@ -1,32 +1,7 @@
-/*       Global      */
+/*--- Global ---*/
 body{
     background-color:#555;
-}
-
-.record{
-    height: 329.5vh;
-    width: 200%;
-    position: relative;
-    margin-top: -100%;
-    margin-left: -50%;
-    z-index: -1;
-}
-
-.record:after{ 
-    background: url("turntableBackground.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-/*    background-position: -1.45em -37.5em;*/
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    content: '';
-    -webkit-animation: spinZ 3s ease;
-}
-
-@-webkit-keyframes spinZ{
-    0% {-webkit-transform: rotateZ(0deg); -webkit-transform-origin: 50% 50% 0;}
-    100% {-webkit-transform: rotateZ(1080deg); -webkit-transform-origin: 50% 50% 0;}
+    overflow-x: hidden;
 }
 
 ol ul{
@@ -38,21 +13,6 @@ ol ul{
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
     border: none;
 }
-
-.glyphicon {
-    padding-bottom:2px;
-    color:#;
-}
-
-/*
-.record {
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: -530px;
-    position: relative;
-}
-*/
 
 /*--- Home ---*/
 #auth {
@@ -84,7 +44,7 @@ ol ul{
     color: red;
 }
 
-/* Playlist */
+/*--- Playlist ---*/
 #cog{
     margin-top: -.23em;
     font-size: 2em;
@@ -176,6 +136,36 @@ ol ul{
     margin-right: 2em;
     color: white;
 }
+
+/*--- Record ---*/
+
+.record{
+    height: 329.5vh;
+    width: 200%;
+    position: relative;
+    margin-top: -100%;
+    margin-left: -50%;
+    z-index: -1;
+}
+
+.record:after{ 
+    background: url("turntableBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+/*    background-position: -1.45em -37.5em;*/
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: '';
+    -webkit-animation: spinZ 3s ease;
+}
+
+@-webkit-keyframes spinZ{
+    0% {-webkit-transform: rotateZ(0deg); -webkit-transform-origin: 50% 50% 0;}
+    100% {-webkit-transform: rotateZ(1080deg); -webkit-transform-origin: 50% 50% 0;}
+}
+
+/*--- Video ---*/
 
 .video-container{
     position: relative;
