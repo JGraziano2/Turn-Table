@@ -14,6 +14,7 @@
         function login() {
             AuthService.login($scope.email, $scope.password).then(function(data) {
                 $state.go('playlist', {id: data.uid});
+                // Checkout Bootstrap Modal for Angular
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
             }).catch(function(error) {
