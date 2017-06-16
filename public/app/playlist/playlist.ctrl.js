@@ -5,9 +5,9 @@
         .module('app')
         .controller('PlaylistCtrl', PlaylistCtrl);
     
-    PlaylistCtrl.$inject = ['$window','$scope', '$stateParams', '$firebaseObject', '$firebaseArray', '$sce', 'ModalService', 'PlaylistService', 'AuthService'];
+    PlaylistCtrl.$inject = ['$window','$scope', '$q', '$stateParams', '$firebaseObject', '$firebaseArray', '$sce', 'ModalService', 'PlaylistService', 'AuthService'];
 
-    function PlaylistCtrl($window, $scope, $stateParams, $firebaseObject, $firebaseArray, $sce, ModalService, PlaylistService, AuthService){        
+    function PlaylistCtrl($window, $scope, $q, $stateParams, $firebaseObject, $firebaseArray, $sce, ModalService, PlaylistService, AuthService){        
         $scope.logout = logout;
         $scope.isEditingPlaylists = false;
         $scope.isEditingSongs = false;
@@ -41,16 +41,25 @@
         activate();
 
         function activate(){
-            var ref = firebase.database().ref().child($stateParams.id).child('playlists');            
-            $scope.playlists = $firebaseArray(ref);
-            selectPlaylist($scope.playlists[0]);
+            var playlistsRef = firebase.database().ref().child($stateParams.id).child('playlists');            
+            $scope.playlists = $firebaseArray(playlistsRef);
 
-            var ref = firebase.database().ref().child($stateParams.id).child('songs');  
-            $scope.songs = $firebaseArray(ref);
-            for(var i = 0; i < $scope.songs.length; i++){
-                if(isFoundSong($scope.songs[i], 1))
-                    displayVid($scope.songs[i]);                    
-            }
+            var songsRef = firebase.database().ref().child($stateParams.id).child('songs');  
+            $scope.songs = $firebaseArray(songsRef);
+
+            $q.all([$scope.playlists.$loaded(), $scope.songs.$loaded()])
+            .then((data) => {
+                $scope.playlists = data[0];  
+                $scope.songs = data[1];
+
+                selectPlaylist($scope.playlists[0]);
+                for(var i = 0; i < $scope.songs.length; i++){
+                    if(isFoundSong($scope.songs[i], 0))
+                        displayVid($scope.songs[i]);                    
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
         }
 
         /*-- PLAYLIST METHODS --*/
@@ -58,7 +67,9 @@
         function addPlaylist(){
             $scope.playlists.$add({name: 'New Playlist', length: 0})
             .then((data) => {
-                $scope.currentPlaylist.$id = data[0].$id;
+                $scope.currentPlaylist = data[0];
+            }).catch((error) => {
+                console.log(error);
             });
         }
 
@@ -82,35 +93,39 @@
         }
 
         function selectPlaylist(playlist){
+            console.log(playlist);
             $scope.currentPlaylist = playlist;
         }
 
         /*-- SONG METHODS --*/
 
         function addSong(){
-            $scope.currentPlaylist.length++; 
             $scope.songs.$add({
                 name: "New Song", 
                 url: "", 
                 playlistId: $scope.currentPlaylist.$id, 
                 index: $scope.currentPlaylist.length
-            });           
-        }  
+            });
+            $scope.currentPlaylist.length++; 
+            $scope.playlists.$save($scope.currentPlaylist);          
+        } 
 
         function editSongs(){
             $scope.isEditingSongs = true;
         }
 
         function moveSongUp(song) {
-            if (song.index == 1) return;
+            console.log(song);
+            if (song.index <= 0) return;
             var previousSong = findSong(song.index-1);
-            swapSongs(song, previousSong);            
+            swapSongs(song, previousSong, -1)    
         }
 
         function moveSongDown(song){
+            console.log(song);
             if(song.index >= $scope.currentPlaylist.length) return;
             var nextSong = findSong(song.index+1);
-            swapSongs(song, nextSong);
+            swapSongs(song, nextSong, 1)
         }
 
         function removeSong(song){
@@ -129,7 +144,7 @@
 
         function displayVid(song) {
             $scope.currentSong = song;
-            $scope.video = $sce.trustAsResourceUrl(song.url);
+            $scope.video = $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + song.url.slice(32) + "?ecver=1");
         }
         
         function playNext(){
@@ -167,24 +182,18 @@
         }
 
         function findSong(songIndex) {
-            var song = {};
             for(var i=0; i<$scope.songs.length; i++){          
-                if($scope.songs[i].index == songIndex) {
-                    song.id = $scope.songs[i].$id;
-                    song.index = $scope.songs[i].index;
-                    return song;
+                if(isFoundSong($scope.songs[i], songIndex)) {
+                    return $scope.songs[i];
                 }
             }
-            return song;
         }
 
-        function swapSongs(song, swap) {
-            for(var i=0; i<$scope.songs.length; i++){
-                if($scope.songs[i].$id == song.$id) 
-                    $scope.songs[i].index = swap.index;
-                if($scope.songs[i].$id == swap.$id) 
-                    $scope.songs[i].index = song.index;
-            }
+        function swapSongs(song, swap, indexChange) {
+            swap.index = song.index;
+            song.index += indexChange;
+            $scope.songs.$save(song);
+            $scope.songs.$save(swap);
         }
         
         function getRandomSequence(n){

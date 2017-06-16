@@ -71,7 +71,7 @@
             <!-- Show Songs -->
             <div class="well" id="songlist" ng-hide="isEditingSongs">
                 <ol>
-                    <li ng-repeat="song in songs | filter: currentPlaylist.id | orderBy:'index'" ng-click="displayVid(song)">{{song.name}}</li>
+                    <li ng-repeat="song in songs | filter: currentPlaylist.$id | orderBy:'index'" ng-click="displayVid(song)">{{song.name}}</li>
                 </ol>
             </div>
             <!-- /Show Songs -->            
@@ -79,7 +79,7 @@
             <!-- Edit Songs -->
             <div class="well" id="songlist" ng-show="isEditingSongs">
                 <ol>
-                    <li ng-repeat="song in songs | filter: currentPlaylist.id | orderBy:'index'">
+                    <li ng-repeat="song in songs | filter: currentPlaylist.$id | orderBy:'index'">
                         <div class="form-group">
                             <input type="text" class="form-control" ng-model="song.name" placeholder="Name" autofocus>
                         </div>
