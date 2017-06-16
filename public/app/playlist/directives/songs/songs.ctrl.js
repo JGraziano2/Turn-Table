@@ -46,7 +46,8 @@
                 index: $scope.currentPlaylist.length
             });
             $scope.currentPlaylist.length++; 
-            $scope.playlists.$save($scope.currentPlaylist);          
+            $scope.playlists.$save($scope.currentPlaylist);
+            loadRandomIndicies();          
         } 
 
         function editSongs(){
@@ -54,6 +55,7 @@
         }
 
         function isFoundSong(song, songIndex) {
+            if(shuffleIsOn) return song.playlistId==$scope.currentPlaylist.$id && song.randIndex == songIndex;
             return song.playlistId == $scope.currentPlaylist.$id && song.index == songIndex;
         }
 
@@ -71,6 +73,7 @@
 
         function removeSong(song){
             $scope.currentPlaylist.length--;
+            $scope.playlists.$save($scope.currentPlaylist);
             $scope.songs.$remove(song); 
         }        
 
@@ -82,7 +85,6 @@
         }
 
         function selectSong(song) {
-            console.log(song);
             $scope.currentSong = song;
             $scope.displayVideo(song);
         }
@@ -102,6 +104,33 @@
             song.index += indexChange;
             $scope.songs.$save(song);
             $scope.songs.$save(swap);
+        }
+        
+        function getRandomSequence(n){
+            var retArr = [];
+            for(var i=0; i<n; i++){
+                retArr.push(i);
+            }
+            for(var i=0; i<n*2; i++){
+                var swapIndex = parseInt(Math.random()*n);
+                if(swapIndex < retArr.length-1 && swapIndex>=0){
+                    var swapVal = retArr[swapIndex];
+                    retArr[swapIndex] = retArr[swapIndex+1];
+                    retArr[swapIndex+1] = swapVal; 
+                }                
+            }
+            return retArr;
+        }
+        
+        function loadRandomIndicies(){
+            var randomSequence = getRandomSequence($scope.currentPlaylist.length);
+            for(var i=0; i < $scope.currentPlaylist.length; i++){
+                for(var j=0; j < $scope.songs.length; j++){
+                    if($scope.songs[j].index==i){
+                        $scope.songs[j].randIndex = randomSequence[i];
+                    }
+                }
+            }
         }
     }  
 })();

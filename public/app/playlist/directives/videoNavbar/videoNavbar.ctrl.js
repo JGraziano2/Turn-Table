@@ -11,7 +11,10 @@
         $scope.video;
 
         $scope.logout = logout;
-        $scope.playVideo = playVideo;    
+        $scope.playVideo = playVideo;
+        $scope.toggleShuffle = toggleShuffle;
+
+        var shuffleIsOn = false;  
 
         ///////////////////  
 
@@ -22,14 +25,23 @@
         }
 
         function playVideo(index) {
-            console.log(index, $scope.currentPlaylist.length);
-            if(index < 0 || index > $scope.currentPlaylist.length) return;
+            var currentIndex = index;
+            
+            if(index < 0) currentIndex = $scope.currentPlaylist.length-1;
+            if(index > $scope.currentPlaylist.length) currentIndex = 0;
+            if(shuffleIsOn) currentIndex = $scope.currentSong.randIndex;
 
             for(var i = 0; i < $scope.songs.length; i++){
-                if($scope.isFoundSong($scope.songs[i], index)) {
+                if($scope.isFoundSong($scope.songs[i], currentIndex)) {
                     $scope.displayVideo($scope.songs[i]);
                 }
             } 
+        }
+        
+        function toggleShuffle(){
+            shuffleIsOn = !shuffleIsOn;
+            if(shuffleIsOn) $('#shuffleButton').css('color', '#ee4');
+            if(!shuffleIsOn) $('#shuffleButton').css('color', 'white');
         }
     }  
 })();

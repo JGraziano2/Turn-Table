@@ -3,10 +3,12 @@
         <div class="row">
             <span class="glyphicon glyphicon-fast-backward controls" 
                 ng-click="playVideo(currentSong.index-1)"></span>
-            <span class="glyphicon glyphicon-pause controls" id="pauseButton" ng-click=""></span>
+            <span class="glyphicon glyphicon-pause controls" id="pauseButton" 
+                ng-click=""></span>
             <span class="glyphicon glyphicon-play controls" id="playButton" 
                 ng-click="playVideo(currentSong.index)"></span>
-            <span class="glyphicon glyphicon-random controls" id="shuffleButton" ng-click=""></span>
+            <span class="glyphicon glyphicon-random controls" id="shuffleButton" 
+                ng-click="toggleShuffle()"></span>
             <span class="glyphicon glyphicon-fast-forward controls" 
                 ng-click="playVideo(currentSong.index+1)"></span>
             <div class="btn-group dropup pull-right">
@@ -14,10 +16,7 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <!-- Dropdown menu links -->
                     <button type="button" class="btn btn-default" ng-click="logout()">Logout</button>
-                    <br>
-                    <button type="button" class="btn btn-default">Themes</button>
                 </ul>
             </div>
         </div>
