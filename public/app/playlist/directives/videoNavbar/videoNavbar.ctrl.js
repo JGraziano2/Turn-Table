@@ -8,13 +8,12 @@
     VideoNavbarCtrl.$inject = ['$window','$scope','AuthService'];
 
     function VideoNavbarCtrl($window, $scope, AuthService){
-        $scope.video;
+        $scope.video; 
+        $scope.shuffleIsOn = false;
 
         $scope.logout = logout;
         $scope.playVideo = playVideo;
-        $scope.toggleShuffle = toggleShuffle;
-
-        var shuffleIsOn = false;  
+        $scope.toggleShuffle = toggleShuffle; 
 
         ///////////////////  
 
@@ -29,7 +28,7 @@
             
             if(index < 0) currentIndex = $scope.currentPlaylist.length-1;
             if(index > $scope.currentPlaylist.length) currentIndex = 0;
-            if(shuffleIsOn) currentIndex = $scope.currentSong.randIndex;
+            if($scope.shuffleIsOn) currentIndex = $scope.currentSong.randIndex;
 
             for(var i = 0; i < $scope.songs.length; i++){
                 if($scope.isFoundSong($scope.songs[i], currentIndex)) {
@@ -39,9 +38,9 @@
         }
         
         function toggleShuffle(){
-            shuffleIsOn = !shuffleIsOn;
-            if(shuffleIsOn) $('#shuffleButton').css('color', '#ee4');
-            if(!shuffleIsOn) $('#shuffleButton').css('color', 'white');
+            $scope.shuffleIsOn = !$scope.shuffleIsOn;
+            if($scope.shuffleIsOn) $('#shuffleButton').css('color', '#ee4');
+            if(!$scope.shuffleIsOn) $('#shuffleButton').css('color', 'white');
         }
     }  
 })();

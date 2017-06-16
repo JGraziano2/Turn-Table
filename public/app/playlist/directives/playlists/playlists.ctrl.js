@@ -57,10 +57,8 @@
             $scope.isEditingPlaylists = false;
         }
 
-        function selectPlaylist(playlist, $event){
-            $(".btn").removeClass('active');
+        function selectPlaylist(playlist){
             $scope.currentPlaylist = playlist;
-            $(event.target).addClass('active');
         }
     }  
 })();

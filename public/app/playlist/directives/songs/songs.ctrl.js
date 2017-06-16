@@ -5,9 +5,9 @@
         .module('app')
         .controller('SongsCtrl', SongsCtrl);
     
-    SongsCtrl.$inject = ['$scope','$stateParams','$firebaseArray'];
+    SongsCtrl.$inject = ['$scope', '$q', '$stateParams','$firebaseArray'];
 
-    function SongsCtrl($scope, $stateParams, $firebaseArray){ 
+    function SongsCtrl($scope, $q, $stateParams, $firebaseArray){ 
         $scope.currentSong;   
         $scope.isEditingSongs = false;
 
@@ -55,7 +55,7 @@
         }
 
         function isFoundSong(song, songIndex) {
-            if(shuffleIsOn) return song.playlistId==$scope.currentPlaylist.$id && song.randIndex == songIndex;
+            if($scope.shuffleIsOn) return song.playlistId==$scope.currentPlaylist.$id && song.randIndex == songIndex;
             return song.playlistId == $scope.currentPlaylist.$id && song.index == songIndex;
         }
 
