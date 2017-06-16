@@ -28,6 +28,13 @@ ol ul{
     height: 100vh;
 }
 
+#buttons {
+    position: fixed;
+    top: 42.7%;
+    left: 47.5%;
+    text-align: center;
+}
+
 /*--- Modal ---*/
 .modal-footer #message {
     color: red;
