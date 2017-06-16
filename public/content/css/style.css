@@ -1,8 +1,15 @@
 /*--- Global ---*/
+.active {
+    color: white !important;
+    background:#555 !important;
+    box-shadow: 0 0 15px white;
+    text-shadow: 2px 2px 5px black;
+}
 
 body{
     background-color:#555;
     overflow-x: hidden;
+    
 }
 
 ol ul{
@@ -22,7 +29,6 @@ ol ul{
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
     background-color: black;
@@ -78,6 +84,20 @@ ol ul{
 
 .glyphicon-save{
     color:#33e;
+}
+
+.main:before {
+    z-index: -1000;
+    background: url("turntableBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 150em;
+    height: 150em;
+    position: absolute;
+    content: '';
+    margin-left: -29em;
+    margin-top: -75em;
+    -webkit-animation: spinZ 3s ease;
 }
 
 #playlist-list{
@@ -139,30 +159,9 @@ ol ul{
 
 /*--- Record ---*/
 
-.record{
-    height: 329.5vh;
-    width: 200%;
-    position: relative;
-    margin-top: -100%;
-    margin-left: -50%;
-    z-index: -1;
-}
-
-.record:after{ 
-    background: url("turntableBackground.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-/*    background-position: -1.45em -37.5em;*/
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    content: '';
-    -webkit-animation: spinZ 3s ease;
-}
-
 @-webkit-keyframes spinZ{
     0% {-webkit-transform: rotateZ(0deg); -webkit-transform-origin: 50% 50% 0;}
-    100% {-webkit-transform: rotateZ(1080deg); -webkit-transform-origin: 50% 50% 0;}
+    100% {-webkit-transform: rotateZ(720deg); -webkit-transform-origin: 50% 50% 0;}
 }
 
 /*--- Video ---*/
@@ -173,7 +172,6 @@ ol ul{
     overflow: hidden;
     padding-bottom: 56.25%;
     padding-top: 35px;
-    margin-top: -100%;
     margin-bottom: -16%;
 }
 
@@ -183,12 +181,4 @@ ol ul{
     left: 16.5%;
     width: 67%;
     height: 67%;
-    
-}
-
-.active {
-    color: white !important;
-    background:#555 !important;
-    box-shadow: 0 0 15px white;
-    text-shadow: 2px 2px 5px black;
 }
