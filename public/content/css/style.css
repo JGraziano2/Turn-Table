@@ -35,6 +35,13 @@ ol ul{
     text-align: center;
 }
 
+#playlist-list li button:focus {
+    color: white;
+    background:#555;
+    box-shadow: 0 0 15px white;
+    text-shadow: 2px 2px 5px black;
+}
+
 .homeButtons {
     background-color: red;
 }
@@ -94,7 +101,7 @@ ol ul{
     font-size:1em;
     padding:.25em 1em;
     line-height:1em;
-    color: white;
+    color: black;
 }
 
 #playlist-list-header{
