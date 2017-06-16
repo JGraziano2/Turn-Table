@@ -112,16 +112,7 @@
             });
             $scope.currentPlaylist.length++; 
             $scope.playlists.$save($scope.currentPlaylist);
-            $scope.playlists.$loaded(function (data){
-                var randomSequence = getRandomSequence($scope.currentPlaylist.length);
-                for(var i=0; i<$scope.currentPlaylist.length; i++){
-                    for(var j=0; j<$scope.songs.length; j++){
-                        if($scope.songs[j].index==i){
-                            $scope.songs[j].randIndex = randomSequence[i];
-                        }
-                    }
-                }
-            });     
+            loadRandomIndicies();
         } 
 
         function editSongs(){
@@ -249,6 +240,16 @@
             }
             return retArr;
         }
-        //console.log("getRandomSequence="+getRandomSequence(5));
+        
+        function loadRandomIndicies(){
+            var randomSequence = getRandomSequence($scope.currentPlaylist.length);
+            for(var i=0; i<$scope.currentPlaylist.length; i++){
+                for(var j=0; j<$scope.songs.length; j++){
+                    if($scope.songs[j].index==i){
+                        $scope.songs[j].randIndex = randomSequence[i];
+                    }
+                }
+            }
+        }
     }  
 })();
