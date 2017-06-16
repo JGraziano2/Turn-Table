@@ -1,6 +1,32 @@
 /*       Global      */
 body{
-    background-color:#555   
+    background-color:#555;
+}
+
+.record{
+    height: 329.5vh;
+    width: 200%;
+    position: relative;
+    margin-top: -100%;
+    margin-left: -50%;
+    z-index: -1;
+}
+
+.record:after{ 
+    background: url("turntableBackground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+/*    background-position: -1.45em -37.5em;*/
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    content: '';
+    -webkit-animation: spinZ 3s ease;
+}
+
+@-webkit-keyframes spinZ{
+    0% {-webkit-transform: rotateZ(0deg); -webkit-transform-origin: 50% 50% 0;}
+    100% {-webkit-transform: rotateZ(1080deg); -webkit-transform-origin: 50% 50% 0;}
 }
 
 ol ul{
@@ -8,14 +34,25 @@ ol ul{
 }
 
 .well {
-    background-color: #ddd;
+    background-color: #000;
     box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    border: none;
 }
 
 .glyphicon {
     padding-bottom:2px;
     color:#;
 }
+
+/*
+.record {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -530px;
+    position: relative;
+}
+*/
 
 /*--- Home ---*/
 #auth {
@@ -97,14 +134,17 @@ ol ul{
     font-size:1em;
     padding:.25em 1em;
     line-height:1em;
+    color: white;
 }
 
 #playlist-list-header{
     padding:0.4em;
     padding-left: 2em;
     margin-bottom:0.4em;
+    margin-top: 0em;
     max-height:50px;
     min-height:50px;
+    color: white;
 }
 
 #songlist-header{    
@@ -113,14 +153,17 @@ ol ul{
     margin-bottom:0.4em;
     margin-right: 2em;
     margin-left: -1.5em;
+    margin-top: 0em;
     max-height:50px;
     min-height:50px;
+    color: white;
 }
 
 #songlist ol li:hover, #playlist-list ul li:hover{
     cursor:pointer;
     padding-left:0.5em;
     box-shadow: 0 0 5px #999;
+    color: white;
 }
 
 #songlist{
@@ -131,14 +174,24 @@ ol ul{
     margin-bottom: 5.5em;
     margin-left: -1.5em;
     margin-right: 2em;
+    color: white;
 }
 
-#spinny{
-    background: url(../img/vinyl-record.jpg) no-repeat center center fixed; 
+.video-container{
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    margin-top: -100%;
+    margin-bottom: -16%;
 }
 
 #vidFrame{
-    display: block;
-    margin: auto;
-    margin-bottom: 2em;
+    position: absolute;
+    top: 3%;
+    left: 16.5%;
+    width: 67%;
+    height: 67%;
+    
 }
