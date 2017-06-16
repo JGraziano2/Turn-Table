@@ -28,24 +28,6 @@ ol ul{
     height: 100vh;
 }
 
-#buttons {
-    position: fixed;
-    top: 42.7%;
-    left: 47.5%;
-    text-align: center;
-}
-
-#playlist-list li button:focus {
-    color: white;
-    background:#555;
-    box-shadow: 0 0 15px white;
-    text-shadow: 2px 2px 5px black;
-}
-
-.homeButtons {
-    background-color: red;
-}
-
 /*--- Modal ---*/
 .modal-footer #message {
     color: red;
@@ -102,6 +84,13 @@ ol ul{
     padding:.25em 1em;
     line-height:1em;
     color: black;
+}
+
+#playlist-list li button:focus {
+    color: white;
+    background:#555;
+    box-shadow: 0 0 15px white;
+    text-shadow: 2px 2px 5px black;
 }
 
 #playlist-list-header{
