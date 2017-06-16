@@ -1,0 +1,40 @@
+<div class="col-md-6">
+
+    <!-- Songs Header -->
+    <div class="well" id="songlist-header">
+        <h4>Songs
+            <span class="glyphicon glyphicon-plus pull-right edit-glyphs" ng-click="addSong()" ng-show="isEditingSongs"></span>
+            <span class="glyphicon glyphicon-pencil pull-right edit-glyphs" ng-click="editSongs()" ng-hide="isEditingSongs"></span>
+            <span class="glyphicon glyphicon-floppy-disk pull-right edit-glyphs" ng-click="saveSongs()" ng-show="isEditingSongs"></span> 
+        </h4>
+    </div>
+    <!-- /Songs Header -->
+
+    <!-- Show Songs -->
+    <div class="well" id="songlist" ng-hide="isEditingSongs">
+        <ol>
+            <li ng-repeat="song in songs | filter: currentPlaylist.$id | orderBy:'index'" 
+            ng-click="selectSong(song)">{{song.name}}</li>
+        </ol>
+    </div>
+    <!-- /Show Songs -->            
+
+    <!-- Edit Songs -->
+    <div class="well" id="songlist" ng-show="isEditingSongs">
+        <ol>
+            <li ng-repeat="song in songs | filter: currentPlaylist.$id | orderBy:'index'">
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="song.name" placeholder="Name" autofocus>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" ng-model="song.url" placeholder="Url">
+                </div>
+                <span class="glyphicon glyphicon-remove" ng-click="removeSong(song)" ng-show="isEditingSongs"></span>
+                <span class="glyphicon glyphicon-arrow-up" ng-click="moveSongUp(song)"></span>
+                <span class="glyphicon glyphicon-arrow-down" ng-click="moveSongDown(song)"></span>
+            </li>                
+        </ol>
+    </div>
+    <!-- /Edit Songs -->
+
+</div>
