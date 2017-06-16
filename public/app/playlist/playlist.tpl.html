@@ -21,7 +21,7 @@
             <div class="col-md-4 col-md-offset-1 col-xs-12">
                 <div class="well" id="playlist-list-header">             
                     <h4>Playlists
-                        <span class="glyphicon glyphicon-plus pull-right edit-glyphs" ng-click="addPlaylist()"></span>
+                        <span class="glyphicon glyphicon-plus pull-right edit-glyphs" ng-click="addPlaylist()" ng-show="isEditingPlaylists"></span>
                         <span class="glyphicon glyphicon-pencil pull-right edit-glyphs" ng-click="editPlaylists()" ng-hide="isEditingPlaylists"></span>
                         <span class="glyphicon glyphicon-floppy-disk pull-right edit-glyphs" ng-click="savePlaylists()" ng-show="isEditingPlaylists"></span>
                     </h4>
@@ -50,7 +50,7 @@
             <div class="col-md-6 col-xs-12">
                 <div class="well" id="songlist-header">
                     <h4>Songs
-                        <span class="glyphicon glyphicon-plus pull-right edit-glyphs" ng-click="addSong()" ></span>
+                        <span class="glyphicon glyphicon-plus pull-right edit-glyphs" ng-click="addSong()" ng-show="isEditingSongs"></span>
                         <span class="glyphicon glyphicon-pencil pull-right edit-glyphs" ng-click="editSongs()" ng-hide="isEditingSongs"></span>
                         <span class="glyphicon glyphicon-floppy-disk pull-right edit-glyphs" ng-click="saveSonglist()" ng-show="isEditingSongs"></span> 
                     </h4>
