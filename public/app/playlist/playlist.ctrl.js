@@ -19,7 +19,7 @@
         $scope.editPlaylists = editPlaylists;
         $scope.removePlaylist = removePlaylist;
         $scope.savePlaylists = savePlaylists;
-        $scope.selectPlaylist = selectPlaylist;
+        $scope.selectPlaylist = selectPlaylist;       
 
         /*-- SONGS --*/
         $scope.songs;
@@ -36,6 +36,8 @@
         $scope.displayVid = displayVid;  
         $scope.playNext = playNext;
         $scope.playPrev = playPrev;
+        $scope.toggleShuffle = toggleShuffle;
+        var shuffleIsOn = false;
 
 
         activate();
@@ -105,10 +107,21 @@
                 name: "New Song", 
                 url: "", 
                 playlistId: $scope.currentPlaylist.$id, 
-                index: $scope.currentPlaylist.length
+                index: $scope.currentPlaylist.length,
+                randIndex: -1
             });
             $scope.currentPlaylist.length++; 
-            $scope.playlists.$save($scope.currentPlaylist);          
+            $scope.playlists.$save($scope.currentPlaylist);
+            $scope.playlists.$loaded(function (data){
+                var randomSequence = getRandomSequence($scope.currentPlaylist.length);
+                for(var i=0; i<$scope.currentPlaylist.length; i++){
+                    for(var j=0; j<$scope.songs.length; j++){
+                        if($scope.songs[j].index==i){
+                            $scope.songs[j].randIndex = randomSequence[i];
+                        }
+                    }
+                }
+            });     
         } 
 
         function editSongs(){
@@ -131,6 +144,7 @@
 
         function removeSong(song){
             $scope.currentPlaylist.length--;
+            $scope.playlists.$save($scope.currentPlaylist);
             $scope.songs.$remove(song); 
         }        
 
@@ -149,25 +163,40 @@
         }
         
         function playNext(){
-            if($scope.currentSong.index >= $scope.currentPlaylist.length) return;
+            var currentIndex;
+            if(shuffleIsOn){
+                currentIndex = $scope.currentSong.randIndex;
+            }else{
+                currentIndex = $scope.currentSong.index;
+            }
+            if(currentIndex == $scope.currentPlaylist.length-1)  currentIndex = -1;
+            console.log("Searching for index:"+currentIndex)
             for(var i = 0; i < $scope.songs.length; i++){
-                if(isFoundSong($scope.songs[i], $scope.currentSong.index+1)) {
-                    displayVid($scope.currentSong);
+                if(isFoundSong($scope.songs[i], currentIndex+1)) {
+                    displayVid($scope.songs[i]);
                     break;
                 }
             } 
+            
         }
         
         function playPrev(){
-            if($scope.currentSong.index <= 1) return;
+            var currentIndex;
+            if(shuffleIsOn){
+                currentIndex = $scope.currentSong.randIndex;
+            }else{
+                currentIndex = $scope.currentSong.index;
+            }
+            if(currentIndex == 0) currentIndex = $scope.currentPlaylist.length;
+            console.log("Searching for index:"+currentIndex)
             for(var i = 0; i < $scope.songs.length; i++){
-                if(isFoundSong($scope.songs[i], $scope.currentSong.index-1)) {
-                    displayVid($scope.currentSong);
+                if(isFoundSong($scope.songs[i], currentIndex-1)) {
+                    displayVid($scope.songs[i]);
                     break;
                 }
-            } 
+            }              
         }
-
+        
         function logout(){
             AuthService.logout().then(() => {
                 $window.location.href = '/';
@@ -175,10 +204,17 @@
                 console.log(error);
             });
         }
+        
+        function toggleShuffle(){
+            shuffleIsOn = !shuffleIsOn;
+            if(shuffleIsOn) $('#shuffleButton').css('color', '#ee4');
+            if(!shuffleIsOn) $('#shuffleButton').css('color', 'white');
+        }
 
         /*-- HELPER METHODS --*/
 
         function isFoundSong(song, songIndex) {
+            if(shuffleIsOn) return song.playlistId==$scope.currentPlaylist.$id && song.randIndex == songIndex;
             return song.playlistId == $scope.currentPlaylist.$id && song.index == songIndex;
         }
 
@@ -199,12 +235,12 @@
         
         function getRandomSequence(n){
             var retArr = [];
-            for(var i=1; i<=n; i++){
+            for(var i=0; i<n; i++){
                 retArr.push(i);
             }
             for(var i=0; i<n*2; i++){
                 var swapIndex = parseInt(Math.random()*n);
-                if(swapIndex<retArr.length&&swapIndex>=0){
+                if(swapIndex<retArr.length-1&&swapIndex>=0){
                     //console.log(swapIndex)
                     var swapVal = retArr[swapIndex];
                     retArr[swapIndex] = retArr[swapIndex+1];
